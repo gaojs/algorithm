@@ -2,13 +2,12 @@
 #include <iostream>
 using namespace std;
 
-const int N=10000;
+const int N=100000;
 static int a[N]={0};
 
 //显示数组所有的元素
 void show(int a[], int n)
 {
-	return; 
 	for(int i=0; i<n; i++)
 	{
 		cout<<a[i]<<" ";
@@ -28,7 +27,7 @@ int main()
 		a[i]=rand()%100;
 	}
 	//cout<<"初始情况:"<<endl;
-	show(a,N);//显示 
+	//show(a,N);//显示 
 	for(i=0; i<N-1; i++)
 	{
 		min=i;//最小项标号 
@@ -48,10 +47,10 @@ int main()
 			a[min]=t;
 		}
 		//cout<<"i="<<i<<endl;
-		show(a,N);
+		//show(a,N);
 	}
 	//cout<<"最终结果:"<<endl;
-	show(a,N);
-	cout<<"比较：" <<bj<<"，交换："<<jh;
+	//show(a,N);
+	//cout<<"比较：" <<bj<<"，交换："<<jh;
 	return 0;
 }

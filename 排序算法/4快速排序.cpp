@@ -3,14 +3,13 @@
 using namespace std;
 
 //统计比较次数和交换次数 
-const int N=100000;
+const int N=1000000;
 static int a[N]={0};
 int bj=0,jh=0;
 
 //显示数组所有的元素
 void show(int a[], int n)
 {
-	return; 
 	for(int i=0; i<n; i++)
 	{
 		cout<<a[i]<<" ";
@@ -32,7 +31,7 @@ void swap(int &a, int &b)
 void QuickSort(int a[], int b, int e)
 {
 	if(b>=e)
-	{//已经拍好了 
+	{//已经排好序了 
 		return;
 	}
 	int i=b,j=e;	
@@ -50,7 +49,7 @@ void QuickSort(int a[], int b, int e)
 		}
 		//if(i>=j) break; 
 		swap(a[i], a[j]);
-		show(a,N);//显示 
+		//show(a,N);//显示 
 		//从左往右，找到一个可以交换的 
 		while(i<j && a[i]<=a[j])
 		{
@@ -59,7 +58,7 @@ void QuickSort(int a[], int b, int e)
 		} 
 		//if(i>=j) break; 
 		swap(a[i], a[j]);
-		show(a,N);//显示 
+		//show(a,N);//显示 
 	}
 	//i=j才结束，i就是中间元素 
 	QuickSort(a, b, i-1);
@@ -78,10 +77,10 @@ int main()
 		a[i]=rand()%100;
 	}
 	//cout<<"初始情况:"<<endl;
-	show(a,N);//显示 
+	//show(a,N);//显示 
 	QuickSort(a,0,N-1); //排序 
 	//cout<<"最终结果:"<<endl;
-	show(a,N);//显示 
-	cout<<"比较：" <<bj<<"，交换："<<jh;
+	//show(a,N);//显示 
+	//cout<<"比较：" <<bj<<"，交换："<<jh;
 	return 0;
 }

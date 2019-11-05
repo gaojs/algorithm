@@ -2,13 +2,12 @@
 #include <iostream>
 using namespace std;
 
-const int N=10000;
+const int N=100000;
 static int a[N]={0};
 	
 //显示数组所有的元素
 void show(int a[], int n)
 {
-	return; 
 	for(int i=0; i<n; i++)
 	{
 		cout<<a[i]<<" ";
@@ -28,7 +27,7 @@ int main()
 		a[i]=rand()%100;
 	}
 	//cout<<"初始情况:"<<endl;
-	show(a,N);//显示 
+	//show(a,N);//显示 
 	for(i=1; i<N; i++)
 	{
 		for(j=0;j<i;j++)
@@ -46,13 +45,13 @@ int main()
 				a[j]=t;//插入	
 				//cout<<"i="<<i<<",";		
 				//cout<<"j="<<j<<endl;
-				show(a,N);	
+				//show(a,N);	
 				break;
 			}
 		}
 	}
 	//cout<<"最终结果:"<<endl;
-	show(a,N);
-	cout<<"比较：" <<bj<<"，移动："<<yd;
+	//show(a,N);
+	//cout<<"比较：" <<bj<<"，移动："<<yd;
 	return 0;
 }
