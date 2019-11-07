@@ -5,15 +5,15 @@ using namespace std;
 //ººÅµËþµÄº¯Êý
 void hanoi(int n, char src, char mid, char dst)
 {
-	if(n<=1)
+	if (n <= 1)
 	{
-		cout<<n<<":"<<src<<"--->"<<dst<<endl;
-		return; 
+		cout << n << ":" << src << "--->" << dst << endl;
+		return;
 	}
-	hanoi(n-1, src, dst, mid);
-	cout<<n<<":"<<src<<"--->"<<dst<<endl;
-	hanoi(n-1, mid, src, dst);
-} 
+	hanoi(n - 1, src, dst, mid);
+	cout << n << ":" << src << "--->" << dst << endl;
+	hanoi(n - 1, mid, src, dst);
+}
 
 int main()
 {
