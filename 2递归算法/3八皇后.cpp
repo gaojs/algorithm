@@ -5,7 +5,7 @@
 using namespace std;
 
 //N是能支持的最大的行数和列数 (行列编号从1开始)
-const int N = 100;
+const int N = 10;
 //QueenPos[i]表示第i行的皇后所处的列数 (i从1开始)
 int QueenPos[N + 1] = { 0 };
 static int QueenCount = 0; //解法数量
@@ -53,7 +53,7 @@ int main()
 {
 	int n;
 
-	cout << "input n(n<=100):";
+	cout << "input n(n<=10):";
 	cin >> n; //输入几行几列的n 
 	QueenCount = 0; //解法数量
 	Queen(1, n); //从第1列开始 
