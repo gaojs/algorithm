@@ -8,6 +8,7 @@ using namespace std;
 const int N = 100;
 //QueenPos[i]表示第i行的皇后所处的列数 (i从1开始)
 int QueenPos[N + 1] = { 0 };
+static int QueenCount = 0; //解法数量
 
 //查找n皇后问题的第k行的解决方法 
 void Queen(int k, int n)
@@ -21,6 +22,7 @@ void Queen(int k, int n)
 			cout << QueenPos[k] << " ";
 		}
 		cout << endl;
+		QueenCount += 1;
 		return;
 	}
 	//查找第k行的摆放位置 
@@ -53,6 +55,8 @@ int main()
 
 	cout << "input n(n<=100):";
 	cin >> n; //输入几行几列的n 
+	QueenCount = 0; //解法数量
 	Queen(1, n); //从第1列开始 
+	cout << "共有 " << QueenCount << " 种放法!" << endl;
 	return 0;
 }
