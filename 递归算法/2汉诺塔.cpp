@@ -19,7 +19,7 @@ int main()
 {
 	int n;
 
-	cout << "input n:";
+	cout << "input n(n<=9):";
 	cin >> n; //ÊäÈëÕûÊın=4
 	hanoi(n, 'A', 'B', 'C');
 	return 0;

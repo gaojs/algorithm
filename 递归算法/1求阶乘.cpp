@@ -15,8 +15,9 @@ int main()
 {
 	int n;
 
-	cout << "input n:";
+	cout << "input n(n>=1,n<=16):";
 	cin >> n; //ÊäÈëÕûÊın=20
-	cout<<factorial(n);
+	//for(n=1;n<20;n++)
+	cout<<n<<"'s factorial is "<<factorial(n)<<endl;
 	return 0;
 }

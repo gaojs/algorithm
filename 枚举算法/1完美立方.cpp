@@ -6,7 +6,7 @@ int main()
 {
 	int n;
 
-	cout << "input n:";
+	cout << "input n(n<=200):";
 	cin >> n; //ÊäÈëÕûÊın=24	
 	for (int a = 2; a <= n; a++)
 	{
