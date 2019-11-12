@@ -1,7 +1,9 @@
+//http://bailian.openjudge.cn/practice/2694/
 //波兰式（前缀表达式） 
 //- * + 3 4 5 6
 //= (3+4)*5-6 =7 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 double exp()
@@ -31,7 +33,8 @@ double exp()
 
 int main()
 {
-	cout << "请输入波兰式（前缀表达式）：";
-	cout << "其值为：" << exp();
+	//cout << "请输入波兰式（前缀表达式）：";
+	//cout << "其值为：" << exp();
+	cout << fixed << setprecision(6) << exp();
 	return 0;
 }

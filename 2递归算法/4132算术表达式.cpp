@@ -1,11 +1,13 @@
-ï»¿//è¡¨è¾¾å¼(expression)æ˜¯ç”±è‹¥å¹²é¡¹(term)ç›¸åŠ æˆ–ç›¸å‡å¾—æ¥çš„,
-//è€Œä¸€ä¸ªé¡¹(term)æ˜¯ç”±è‹¥å¹²å› å­(factor)ç›¸ä¹˜æˆ–ç›¸é™¤çš„å¾—æ¥çš„ã€‚
-//å› å­(factor)å¯ä»¥æ˜¯ä¸€ä¸ªæ•´æ•°æž„æˆï¼Œä¹Ÿå¯ä»¥ç”±æ‹¬å·æ‹¬èµ·æ¥çš„è¡¨è¾¾å¼ã€‚
-//å¦‚è¡¨è¾¾å¼ï¼š(2 + 3) * (5 + 7) + 9 / 3
-//(2 + 3) * (5 + 7)æ˜¯ä¸€ä¸ªé¡¹ï¼Œ9 / 3 ä¹Ÿæ˜¯ä¸€ä¸ªé¡¹ï¼Œ
-//å‰è€…ç”±ä¸¤ä¸ªå› å­æž„æˆï¼Œå…¶ä¸­å› å­åˆç”±è¡¨è¾¾å¼æž„æˆã€‚
-//åŽè€…ä¹Ÿæ˜¯ç”±ä¸¤ä¸ªå› å­æž„æˆï¼Œè¿™ä¸¤ä¸ªå› å­ç”±æ•´æ•°æž„æˆã€‚
+//http://bailian.openjudge.cn/practice/4132/
+//±í´ïÊ½(expression)ÊÇÓÉÈô¸ÉÏî(term)Ïà¼Ó»òÏà¼õµÃÀ´µÄ,
+//¶øÒ»¸öÏî(term)ÊÇÓÉÈô¸ÉÒò×Ó(factor)Ïà³Ë»òÏà³ýµÄµÃÀ´µÄ¡£
+//Òò×Ó(factor)¿ÉÒÔÊÇÒ»¸öÕûÊý¹¹³É£¬Ò²¿ÉÒÔÓÉÀ¨ºÅÀ¨ÆðÀ´µÄ±í´ïÊ½¡£
+//Èç±í´ïÊ½£º(2 + 3) * (5 + 7) + 9 / 3
+//(2 + 3) * (5 + 7)ÊÇÒ»¸öÏî£¬9 / 3 Ò²ÊÇÒ»¸öÏî£¬
+//Ç°ÕßÓÉÁ½¸öÒò×Ó¹¹³É£¬ÆäÖÐÒò×ÓÓÖÓÉ±í´ïÊ½¹¹³É¡£
+//ºóÕßÒ²ÊÇÓÉÁ½¸öÒò×Ó¹¹³É£¬ÕâÁ½¸öÒò×ÓÓÉÕûÊý¹¹³É¡£
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 double exp();
@@ -91,7 +93,7 @@ double exp()
 
 int main()
 {
-	cout << "è¯·è¾“å…¥ä¸€ä¸ªç®—æœ¯è¡¨è¾¾å¼ï¼š";
-	cout << exp() << endl;
+	//cout << "ÇëÊäÈëÒ»¸öËãÊõ±í´ïÊ½£º";
+	cout << fixed << setprecision(2) << exp() << endl;
 	return 0;
 }
