@@ -1,3 +1,4 @@
+//http://bailian.openjudge.cn/practice/2810/
 //a*a*a==b*b*b+c*c*c+d*d*d(b<=c<=d,n<=100) 
 #include <iostream>
 using namespace std;
@@ -6,7 +7,7 @@ int main()
 {
 	int n;
 
-	cout << "input n(n<=200):";
+	//cout << "input n(n<=200):";
 	cin >> n; //ÊäÈëÕûÊın=24	
 	for (int a = 2; a <= n; a++)
 	{
