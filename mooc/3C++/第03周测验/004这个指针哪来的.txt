@@ -1,0 +1,33 @@
+总时间限制: 1000ms 内存限制: 65536kB
+
+描述
+填空，按要求输出
+
+#include <iostream>
+using namespace std;
+
+struct A
+{
+	int v;
+	A(int vv):v(vv) { }
+// 在此处补充你的代码
+};
+
+int main()
+{
+	const A a(10);
+	const A * p = a.getPointer();
+	cout << p->v << endl;
+	return 0;
+}
+
+输入
+无
+
+输出
+10
+
+样例输入
+无
+样例输出
+10
