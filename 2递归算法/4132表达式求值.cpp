@@ -12,7 +12,7 @@ using namespace std;
 
 double exp();
 double factor()
-{
+{//(
 	double a = 0;
 	while (true)
 	{
@@ -35,7 +35,7 @@ double factor()
 }
 
 double term()
-{
+{//*/
 	double a = factor(), b = 0;
 	while (true)
 	{
@@ -63,7 +63,7 @@ double term()
 }
 
 double exp()
-{
+{//+-
 	double a = term(), b = 0;
 	while (true)
 	{

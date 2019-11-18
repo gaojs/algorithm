@@ -3,41 +3,99 @@
 #include <string>
 using namespace std;
 
-bool notExp(char a[], int n)
-{
-	if(n<=0) return false;
-	else if(n==1)
+bool orExp();
+bool factor()
+{//( 
+	bool a = false;
+	while (true)
 	{
-		switch(a[0])
+		char c = cin.peek();
+		switch (c)
 		{
-			case 'V': return true;
-			case 'F': return false;
-			default: return false;
+		case ' ':
+			c = cin.get();
+			continue;
+		case '(':
+			c = cin.get();
+			a = orExp();
+			c = cin.get();
+			return (a);
+		case 'V':
+			c = cin.get();
+			return true;
+		case 'F':
+			c = cin.get();
+			return false;
+		default:
+			return false;
+		}
+	}	
+}
+
+bool notExp()
+{//!
+	while (true)
+	{
+		char c = cin.peek();
+		switch (c)
+		{
+		case ' ':
+			c = cin.get();
+			continue;
+		case '!':
+			c = cin.get();
+			return !notExp();
+		case '=':
+		default:
+			return factor();
+		}
+	}		
+}
+
+bool andExp()
+{//& 
+	bool a = notExp(), b = false;
+	while (true)
+	{
+		char c = cin.peek();
+		switch (c)
+		{
+		case ' ':
+			c = cin.get();
+			continue;
+		case '&':
+			c = cin.get();
+			b = notExp();
+			a = (a && b);
+			break;
+		case '=':
+		default:
+			return a;
+		}
+	}	
+}
+
+bool orExp()
+{//|
+	bool a = andExp(), b = false;
+	while (true)
+	{
+		char c = cin.peek();
+		switch (c)
+		{
+		case ' ':
+			c = cin.get();
+			continue;
+		case '|':
+			c = cin.get();
+			b = andExp();
+			a = (a || b);
+			break;
+		case '=':
+		default:
+			return a;
 		}
 	}
-	else if(n==2)
-	{
-		
-	}
-	
-}
-
-bool andExp(char a[], int n)
-{
-	if(n<=0) return false;
-	
-}
-
-bool orExp(char a[], int n)
-{
-	if(n<=0) return false;
-	
-}
-
-bool exp(string s, int n)
-{
-	if(n<=0) return false;
-	return true;
 }
 
 int main()
@@ -46,17 +104,19 @@ int main()
 	char a[N] = {0};
 	int n=0;
 		 
-	while(cin.getline(a, N))
+	do
 	{
-		cout<<"Expression "<<++n<<": ";
-		if(exp(string(a), strlen(a)))
+		if(orExp())
 		{
+			cout<<"Expression "<<++n<<": ";
 			cout<<"V"<<endl;
 		}
 		else
 		{
+			cout<<"Expression "<<++n<<": ";
 			cout<<"F"<<endl;
 		}		
-	}	
+		cin.get();//»»ÐÐ 
+	} while (cin.peek()!=EOF);
 	return 0;
 }
