@@ -1,0 +1,11 @@
+v1.push_back()   //在数组的最后添加一个数据
+v1.pop_back()    //去掉数组的最后一个数据 
+v1.front() 　　　//返回第一个元素(栈顶元素)
+v1.begin()          //得到数组头的指针，用迭代器接受
+v1.end()             //得到数组的最后一个单元+1的指针，用迭代器接受
+v1.clear()           // 移除容器中所有数据
+v1.empty()         //判断容器是否为空
+v1.erase(pos)    //删除pos位置的数据
+v1.erase(beg,end)// 删除[beg,end)区间的数据
+v1.size()         //回容器中实际数据的个数
+v1.insert(pos,data) //在pos处插入数据
