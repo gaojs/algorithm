@@ -2,7 +2,7 @@
 using namespace std;
 
 class MyCin {
-		// 在此处补充你的代码
+// 在此处补充你的代码
 		bool done;
 	public:
 		MyCin():done(false) {
@@ -19,6 +19,7 @@ class MyCin {
 			}
 			return *this;
 		}
+// 在此处补充你的代码
 };
 
 int main() {

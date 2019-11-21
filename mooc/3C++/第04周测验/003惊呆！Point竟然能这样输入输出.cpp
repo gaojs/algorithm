@@ -16,6 +16,7 @@ class Point {
 		out<<p.x<<","<<p.y;
 		return out;
 	} 
+// 在此处补充你的代码
 };
 
 int main() {

@@ -32,6 +32,7 @@ class D : public B{
 			nDVal = n;
 		}
 };
+// 在此处补充你的代码
 
 int main() {
 	B * pb;

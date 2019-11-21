@@ -4,13 +4,14 @@ using namespace std;
 
 template <class T>
 T SumArray(
-    // 在此处补充你的代码
+// 在此处补充你的代码
     T* s, T* e) {
 	T t;
 	for(T *i=s; i<e; i++) {
 		t+=*i;
 	}
 	return t;
+// 在此处补充你的代码
 }
 
 int main() {

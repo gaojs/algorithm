@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-	freopen("F:\\aain.txt","r",stdin);
+	//freopen("F:\\aain.txt","r",stdin);
 	map<int,list<int>> m;
 	int n,i,id,id2,e;
 	string s;

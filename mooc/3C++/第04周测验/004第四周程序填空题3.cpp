@@ -50,6 +50,7 @@ class Array2 {
 		int operator()(int i, int j) { //a(i,j)
 			return p[i][j];
 		}
+// 在此处补充你的代码
 };
 
 int main() {

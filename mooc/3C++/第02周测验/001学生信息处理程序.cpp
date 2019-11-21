@@ -28,6 +28,7 @@ class Student {
 		void output() {
 			cout<<name<<","<<age<<","<<no<<","<<average<<endl;
 		}
+// 在此处补充你的代码
 };
 
 int main() {

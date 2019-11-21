@@ -41,6 +41,7 @@ int Animal::number=0;
 int Cat::number=0;
 int Dog::number=0;
 
+// 在此处补充你的代码
 void print() {
 	cout << Animal::number << " animals in the zoo, ";
 	cout << Dog::number << " of them are dogs, ";

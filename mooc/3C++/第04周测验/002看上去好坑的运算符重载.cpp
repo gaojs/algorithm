@@ -7,7 +7,7 @@ class MyInt {
 		MyInt( int n) {
 			nVal = n ;
 		}
-		// 在此处补充你的代码
+// 在此处补充你的代码
 		MyInt &operator-(int i) {
 			nVal-=i;
 			return *this;
@@ -16,6 +16,7 @@ class MyInt {
 		operator int () {
 			return nVal;
 		}
+// 在此处补充你的代码
 };
 
 int Inc(int n) {

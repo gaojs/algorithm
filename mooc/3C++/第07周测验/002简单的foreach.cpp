@@ -9,6 +9,7 @@ void MyForeach(T *s, T *e, void (*f)(T2)) {
 		f(*i);
 	}
 }
+// 在此处补充你的代码
 
 void Print(string s) {
 	cout << s;

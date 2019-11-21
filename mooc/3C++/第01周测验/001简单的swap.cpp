@@ -12,6 +12,7 @@ class A {
 void swap(
 // 在此处补充你的代码
 A &a, A &b 
+// 在此处补充你的代码
 ) {
 	int  tmp = a.x;
 	a.x = b.x;

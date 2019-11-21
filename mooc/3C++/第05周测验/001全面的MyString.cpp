@@ -31,7 +31,7 @@ void strcat(char * d,const char * s) {
 }
 
 class MyString {
-		// 在此处补充你的代码
+// 在此处补充你的代码
 	public:
 		char *ps;
 		int len;
@@ -126,6 +126,7 @@ class MyString {
 		bool operator>(const MyString &ms){
 			return strcmp(ps,ms.ps)>0?true:false;			
 		} 
+// 在此处补充你的代码
 };
 
 

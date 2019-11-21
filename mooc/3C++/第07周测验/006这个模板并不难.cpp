@@ -17,6 +17,7 @@ class myclass {
 				p[i]=pp[i];
 			}
 		}
+// 在此处补充你的代码
 
 		~myclass( ) {
 			delete [] p;

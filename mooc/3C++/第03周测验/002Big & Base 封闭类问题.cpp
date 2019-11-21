@@ -16,6 +16,7 @@ class Big {
 		Big(int n):b(n) {
 			v=n;
 		}
+// 在此处补充你的代码
 };
 
 int main() {

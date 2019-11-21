@@ -17,7 +17,7 @@ class MyString {
 		~MyString() {
 			if(p) delete [] p;
 		}
-		// 在此处补充你的代码
+// 在此处补充你的代码
 		MyString& operator=(MyString &ms) {
 			p = new char[strlen(ms.p) + 1];
 			strcpy(p,ms.p);
@@ -39,6 +39,7 @@ class MyString {
 			strcpy(p,s);
 			return *this;			
 		} 
+// 在此处补充你的代码
 };
 
 

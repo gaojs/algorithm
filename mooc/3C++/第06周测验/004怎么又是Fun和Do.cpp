@@ -32,6 +32,7 @@ class C:public B {
 void Call(
 // 在此处补充你的代码
 A *p
+// 在此处补充你的代码
 ) {
 	p->Fun();
 	p->Do();

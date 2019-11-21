@@ -4,7 +4,7 @@
 using namespace std;
 
 class MyString:public string {
-		// 在此处补充你的代码
+// 在此处补充你的代码
 	public:
 		MyString():string() {}
 		MyString(const char *s):string(s) {}
@@ -15,6 +15,7 @@ class MyString:public string {
 		MyString operator()(int n, int m) {
 			return substr(n,m);
 		}
+// 在此处补充你的代码
 };
 
 

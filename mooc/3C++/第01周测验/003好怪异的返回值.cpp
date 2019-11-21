@@ -3,6 +3,7 @@ using namespace std;
 
 // 在此处补充你的代码
 int &
+// 在此处补充你的代码
 getElement(int * a, int i) {
 	return a[i];
 }

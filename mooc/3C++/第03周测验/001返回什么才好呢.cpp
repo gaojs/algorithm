@@ -14,6 +14,7 @@ class A {
 		A &GetObj() {
 			return *this;
 		}
+// 在此处补充你的代码
 };
 
 int main() {

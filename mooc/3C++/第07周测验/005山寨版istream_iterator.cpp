@@ -22,6 +22,7 @@ class CMyistream_iterator {
 			*pi>>t;
 			return t;
 		}
+// 在此处补充你的代码
 };
 
 int main() {

@@ -16,6 +16,7 @@ class Complex {
 		Complex(const char s[]) {
 			sscanf(s, "%lf+%lfi", &r, &i);
 		}
+// 在此处补充你的代码
 };
 
 int main() {

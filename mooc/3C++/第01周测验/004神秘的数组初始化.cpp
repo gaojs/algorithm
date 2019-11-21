@@ -3,8 +3,10 @@ using namespace std;
 
 int main() {
 	int * a[] = {
-	// 在此处补充你的代码
-	NULL,NULL,new int,new int[6]};
+// 在此处补充你的代码
+	NULL,NULL,new int,new int[6]
+// 在此处补充你的代码
+	};
 
 	*a[2] = 123;
 	a[3][5] = 456;

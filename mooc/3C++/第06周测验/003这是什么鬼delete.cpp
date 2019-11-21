@@ -8,6 +8,7 @@ class A {
 		virtual ~A() {
 			cout << "destructor A" << endl;
 		}
+// 在此处补充你的代码
 };
 
 class B:public A {

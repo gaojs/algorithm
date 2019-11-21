@@ -11,6 +11,7 @@ class A {
 		~A() {
 			cout<<i<<endl;
 		}
+// 在此处补充你的代码
 };
 
 int main() {

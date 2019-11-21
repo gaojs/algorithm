@@ -13,6 +13,7 @@ class Sample {
 		Sample(const Sample &x) {
 			v=x.v+2;
 		}
+// 在此处补充你的代码
 };
 
 void PrintAndDouble(Sample o) {

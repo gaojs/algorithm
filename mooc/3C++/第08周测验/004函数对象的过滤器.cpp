@@ -12,7 +12,6 @@ struct A {
 };
 
 // 在此处补充你的代码
-
 template <class T>
 struct FilterClass {
 	T m,n;
@@ -23,7 +22,6 @@ struct FilterClass {
 		return (t<n&&m<t);
 	}
 };
-
 // 在此处补充你的代码end
 
 template <class T>

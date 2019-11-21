@@ -8,6 +8,7 @@ struct A {
 	const A *getPointer() const {
 		return this;
 	}
+// 在此处补充你的代码
 };
 
 int main() {

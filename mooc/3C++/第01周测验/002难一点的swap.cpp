@@ -4,6 +4,7 @@ using namespace std;
 void swap(
 // 在此处补充你的代码
 int *&a,int *&b
+// 在此处补充你的代码
 ) {
 	int * tmp = a;
 	a = b;
