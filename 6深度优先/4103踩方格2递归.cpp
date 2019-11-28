@@ -1,5 +1,5 @@
 //http://bailian.openjudge.cn/practice/4103/
-//f(n)=f(n-1)+2(f(n-2)+...+f(1)+f(0))+2;
+//f(n)=f(n-1)+2*(f(n-2)+...+f(1)+f(0)+1);
 #include <iostream>
 using namespace std;
  
@@ -9,13 +9,12 @@ int f(int n)
 	{//ÁÙ½çÌõ¼ş 
 		return 1;
 	}
-	int m = f(n-1);	
+	int m = f(n-1), s=1;	
 	for(n-=2;n>=0;n--)
 	{
-		m+=2*f(n);
+		s+=f(n);
 	}
-	m+=2;
-	return m;
+	return m+2*s;
 }
 
 int main()
