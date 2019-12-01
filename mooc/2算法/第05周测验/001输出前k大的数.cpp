@@ -38,7 +38,7 @@ void arrangeRight(int a[],int k,int s,int e) {
 
 		if(e - i + 1 == k)  return;
 		else if(e - i + 1 > k)  arrangeRight(a,k,i+1,e);
-		else                    arrangeRight(a,k-(e-i+1),s,i-1);
+		else arrangeRight(a,k-(e-i+1),s,i-1);
 	}
 }
 
