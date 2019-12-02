@@ -11,16 +11,13 @@ int findMax(int a[], int n)
 {
 	int i,j,m=0;
 	
-	for(i=0;i<n;i++)
-	{
-		c[n-1]=1;
-	}
-	m=c[n-1];
+	m=c[n-1]=1;
 	for(i=n-2;i>=0;i--)
 	{
+		c[i]=1;
 		for(j=n-1;j>i;j--)
 		{
-			if(a[i]<a[j])
+			if(a[i]<=a[j])
 			{
 				if(c[i]<c[j]+1)
 				{
