@@ -1,6 +1,5 @@
 //http://bailian.openjudge.cn/practice/4151/
 //谁后结束，优先选择谁 
-#include <cstdio>
 #include <algorithm>
 #include <iostream>
 using namespace std;
