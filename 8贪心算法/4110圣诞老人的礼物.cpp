@@ -43,15 +43,14 @@ int main()
 {
 	int n,w,i;
 	
-	cin>>n>>w;
-	
+	cin>>n>>w;	
 	for(i=0;i<n;i++)
 	{
 		cin>>a[i].value;
-		cin>>a[i].weight;
-		sort(a, a+n);
-		cout<<fixed<<setprecision(1);		
+		cin>>a[i].weight;	
 	}
+	sort(a, a+n);
+	cout<<fixed<<setprecision(1);	
 	cout<<count(a,n,w)<<endl;	
 	return 0;
 }
