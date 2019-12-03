@@ -13,13 +13,13 @@ int s[M+1]={0}; //step=-1无效
 int cost(int n, int step, int k)
 {	
 	memset(s,-1,sizeof(s));
-	s[n]=step; //初始值 
-	que.push(n);
+	s[k]=step; //初始值 
+	que.push(k);
 	while(que.size())
 	{
 		int t=que.front();
 		que.pop(); //出队 
-		if(t==k) 
+		if(t==n) 
 		{//抓到了 
 			break;
 		}
@@ -39,16 +39,16 @@ int cost(int n, int step, int k)
 				que.push(t+1);
 			}			
 		}
-		if(t*2<M)
+		if(t%2==0)
 		{//半 
-			if(s[t*2]<0)
+			if(s[t/2]<0)
 			{//未赋值 
-				s[t*2]=s[t]+1;
-				que.push(t*2);
+				s[t/2]=s[t]+1;
+				que.push(t/2);
 			}						
 		}		
 	} 
-	return s[k];
+	return s[n];
 }
 
 

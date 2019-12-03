@@ -7,7 +7,7 @@ const int N=100000;
 int a[N]={0};
 
 //将前k大的数，都移动到最左侧 
-int ni(int a[], int n)
+long long ni(int a[], int n)
 { 	
 	if(n<=1)
 	{
@@ -15,7 +15,8 @@ int ni(int a[], int n)
 	}
 	else
 	{
-		int mid=n/2, sum=0,i,j;
+		int mid=n/2,i,j;
+		long long sum=0; 
 		sum+=ni(a,mid);
 		sum+=ni(a+mid,n-mid);
 		sort(a,a+mid);
