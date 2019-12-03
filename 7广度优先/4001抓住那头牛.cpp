@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-const int N=100000, M=10*N;
+const int N=100000, M=2*N;
 //解决广搜问题，队列是个好东西
 queue<int> que; 
 //走到s[i]坐标i处，已经行走的步数 
