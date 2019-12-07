@@ -15,8 +15,8 @@ long long ni(int a[], int n)
 	}
 	else
 	{
-		long long sum=0;
 		int mid=n/2,i,j;
+		long long sum=0; 
 		sum+=ni(a,mid);
 		sum+=ni(a+mid,n-mid);
 		sort(a,a+mid);
