@@ -4,35 +4,32 @@ using namespace std;
 
 const int N=10000;
 int a[N+1]={0};
-int s[N+1][N+1]={0};
 
 int main()
 {
-	int n,i,j,m,t,max,maxB,maxE;
+	int n,i,max,maxB,maxE,sum,begin;
 	
 	cin>>n;
 	for(i=0;i<n;i++)
-	{
+	{//输入 
 		cin>>a[i];
-		s[i][i]=a[i]; 
 	}	
-	max=-1;
-	maxB=0,maxE=n-1;	
+	max=maxB=maxE=-1;//无效值 
+	sum=0,begin=0;//初始值 
 	for(i=0;i<n;i++)
-	{
-		for(j=i;j<n;j++)
-		{
-			if(s[i][j]==0&&j>i) 
-			{
-				s[i][j]=s[i][j-1]+a[j];
-			}
-			if(max<s[i][j])
-			{
-				max=s[i][j];
-				maxB=i;
-				maxE=j;
-			}
+	{//从0开始寻找 
+		sum+=a[i];
+		if(max<sum)
+		{//找到更大的和了 
+			max=sum; //最大和 
+			maxB=begin; //起始点 
+			maxE=i; //当前为结束点 
 		}
+		if(sum<0) //丢弃前面的部分 
+		{//和小于0，begin从下个元素开始 
+			sum=0;	
+			begin=i+1;
+		} 
 	}
 	if(max<0) cout<<0<<" "<<a[0]<<" "<<a[n-1];
 	else cout<<max<<" "<<a[maxB]<<" "<<a[maxE];
