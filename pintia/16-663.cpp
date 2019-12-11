@@ -4,6 +4,7 @@ using namespace std;
 
 const int N=10000;
 int a[N+1]={0};
+int s[N+1][N+1]={0};
 
 int main()
 {
@@ -13,6 +14,7 @@ int main()
 	for(i=0;i<n;i++)
 	{
 		cin>>a[i];
+		s[i][i]=a[i]; 
 	}	
 	max=-1;
 	maxB=0,maxE=n-1;	
@@ -20,14 +22,13 @@ int main()
 	{
 		for(j=i;j<n;j++)
 		{
-			m=0;
-			for(t=i;t<=j;t++)
+			if(s[i][j]==0&&j>i) 
 			{
-				m+=a[t];
+				s[i][j]=s[i][j-1]+a[j];
 			}
-			if(max<m)
+			if(max<s[i][j])
 			{
-				max=m;
+				max=s[i][j];
 				maxB=i;
 				maxE=j;
 			}
