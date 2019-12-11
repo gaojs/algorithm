@@ -1,3 +1,4 @@
+#include <set>
 #include <iostream>
 using namespace std;
 
@@ -9,11 +10,11 @@ struct Edge
 const int N=10000,M=10000,K=100;
 Edge e[M]={0}; //e(v1,v2)为每条边的顶点 
 int v[N]={0}; //v[i]每个顶点i的颜色 
-int c[K]={0}; //颜色的种类0 
+set<int>colors; //颜色的集合
 
 int main()
 {	
-	int n,m,i,k,j,colors,t;
+	int n,m,i,k,j;
 	
 	cin>>n>>m; 
 	for(i=0;i<m;i++)
@@ -23,22 +24,11 @@ int main()
 	cin>>k;
 	for(i=0;i<k;i++)
 	{
-		colors=0; //颜色数 
+		colors.clear();
 		for(j=0;j<n;j++)
 		{
 			cin>>v[j];
-			for(t=0;t<colors;t++)
-			{//查找颜色 
-				if(c[t]==v[j])
-				{//找到 
-					break; 
-				}
-			}
-			if(t==colors)
-			{//未找到 
-				c[t]=v[j];
-				colors++; 
-			} 
+			colors.insert(v[j]);
 		}
 		for(j=0;j<m;j++)
 		{
@@ -53,7 +43,7 @@ int main()
 		}
 		else
 		{//可以		 
-			cout<<colors<<"-coloring"<<endl;	
+			cout<<colors.size()<<"-coloring"<<endl;	
 		}	
 	} 	
 	return 0;
