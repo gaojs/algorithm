@@ -101,7 +101,9 @@ string find(const string& s, int m)
 			for (int j = 0; j < i && j < m; j++)
 			{//左边放几个加号
 				t1 = find(s.substr(0, i), j);
+				if (cmp(t1, min) > 0) continue;
 				t2 = find(s.substr(i), m - 1 - j);
+				if (cmp(t2, min) > 0) continue;
 				sum = add(t1, t2); //这里要用add()
 				if (cmp(min, sum) > 0) //这里要用cmp()
 				{//找到更小的值了
