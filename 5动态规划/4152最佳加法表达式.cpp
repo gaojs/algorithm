@@ -81,8 +81,8 @@ string add(const string& s1, const string& s2)
 
 const int M = 49, N = 50; //字符串的最大长度
 const string MAX = string(N, '9'); //最大值
-//v[m][n]表示将m个符号插入到n个数字中的最小值
-string v[M][N];
+//a[m][n]表示将m个符号插入到n个数字中的最小值
+string a[M][N];
 
 string find(int m, const string& s)
 {
@@ -99,16 +99,16 @@ string find(int m, const string& s)
 	{//加号从1开始放
 		for (int nt = 0; nt <= n; nt++)
 		{//0个符号的情况
-			v[0][nt] = s.substr(0, nt);
+			a[0][nt] = s.substr(0, nt);
 		}
 		for (int mt = 1; mt <= m; mt++)
 		{//m个符号的情况
 			for (int nt = mt + 1; nt <= n; nt++)
 			{//n个数字的情况
-				string min = v[0][nt];
+				string min = a[0][nt];
 				for (int i = mt; i < nt; i++)
 				{//最后一个加号的位置，从左往右尝试
-					string t1 = v[mt - 1][i];
+					string t1 = a[mt - 1][i];
 					if (cmp(t1, min) > 0) continue;
 					string t2 = s.substr(i, nt - i);
 					if (cmp(t2, min) > 0) continue;
@@ -118,10 +118,10 @@ string find(int m, const string& s)
 						min = sum;
 					}
 				}
-				v[mt][nt] = min;
+				a[mt][nt] = min;
 			}
 		}
-		return v[m][n];
+		return a[m][n];
 	}
 }
 
