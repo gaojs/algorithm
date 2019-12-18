@@ -1,7 +1,6 @@
 //http://bailian.openjudge.cn/practice/4152/
 //http://cxsjsxmooc.openjudge.cn/2019t2fall6/003/
 //http://cxsjsxmooc.openjudge.cn/2019t2fallall/014/
-#include <vector>
 #include <string>
 #include <iostream>
 using namespace std;
@@ -84,13 +83,13 @@ const int M = 49, N = 50; //字符串的最大长度
 const string MAX = string(N, '9'); //最大值
 //v[m][n]表示将m个符号插入到n个数字中的最小值
 string v[M][N];
-string str;
 
-string find(int m, int n)
+string find(int m, const string& s)
 {
+	int n = (int)s.length();
 	if (m == 0)
 	{//没有加号，原值
-		return str;
+		return s;
 	}
 	else if (m >= n)
 	{//加号太多，放不下
@@ -100,7 +99,7 @@ string find(int m, int n)
 	{//加号从1开始放
 		for (int nt = 0; nt <= n; nt++)
 		{//0个符号的情况
-			v[0][nt] = str.substr(0, nt);
+			v[0][nt] = s.substr(0, nt);
 		}
 		for (int mt = 1; mt <= m; mt++)
 		{//m个符号的情况
@@ -111,7 +110,7 @@ string find(int m, int n)
 				{//最后一个加号的位置，从左往右尝试
 					string t1 = v[mt - 1][i];
 					if (cmp(t1, min) > 0) continue;
-					string t2 = str.substr(i, nt - i);
+					string t2 = s.substr(i, nt - i);
 					if (cmp(t2, min) > 0) continue;
 					string sum = add(t1, t2); //这里要用add()
 					if (cmp(min, sum) > 0) //这里要用cmp()
@@ -128,12 +127,13 @@ string find(int m, int n)
 
 int main()
 {
+	string s;
 	int m;
 
 	while (cin >> m)
 	{
-		cin >> str;
-		cout << find(m, (int)str.length()) << endl;
+		cin >> s;
+		cout << find(m, s) << endl;
 	}
 	return 0;
 }
