@@ -6,7 +6,7 @@ using namespace std;
 const int M = 20;
 const int MAX = (M * M + 1);
 //切1刀，分2块 
-int a[M] = { 0 };
+int a[M + 1][M + 1][M * M] = { 0 };
 
 //递推式：find(w,h,m)=min(sv,sh)
 //sv为第一刀竖着切，sh为第一刀横着切
@@ -26,34 +26,51 @@ int find(int w, int h, int m)
 	}
 	else
 	{//多于1块
-		int svMin = MAX, shMin = MAX;
-		for (int i = 1; i < w; i++)
-		{//竖着切,左边宽为i的最好结果
-			for (int k = 0; k < m; k++)
-			{//在左边宽为i的蛋糕上切k刀
-				int left = find(i, h, k);
-				int right = find(w - i, h, m - 1 - k);
-				int max = left > right ? left : right;
-				if (svMin > max)
-				{//左右两边都比较小
-					svMin = max;
-				}
+		for (int i = 0; i <= w; i++)
+		{//宽
+			for (int j = 0; j <= h; j++)
+			{//高
+				a[i][j][0] = i * j; //不用切
 			}
-		}		
-		for (int i = 1; i < h; i++)
-		{//横着切,上边宽为i的最好结果
-			for (int k = 0; k < m; k++)
-			{//在上边宽为i的蛋糕上切k刀
-				int up = find(w, i, k);
-				int down = find(w, h - i, m - 1 - k);
-				int max = up > down ? up : down;
-				if (shMin > max)
-				{//左右两边都比较小
-					shMin = max;
+		}
+		for (int mt = 1; mt <= m; mt++)
+		{
+			for (int wt = 0; wt <= w; wt++)
+			{
+				for (int ht = 0; ht <= h; ht++)
+				{
+					int svMin = MAX, shMin = MAX;
+					for (int i = 1; i < wt; i++)
+					{//竖着切,左边宽为i的最好结果
+						for (int j = 0; j < mt; j++)
+						{//在左边宽为i的蛋糕上切j刀
+							int left = a[i][ht][j];
+							int right = a[wt - i][ht][mt - 1 - j];
+							int max = left > right ? left : right;
+							if (svMin > max)
+							{//左右两边都比较小
+								svMin = max;
+							}
+						}
+					}
+					for (int i = 1; i < ht; i++)
+					{//横着切,上边宽为i的最好结果
+						for (int j = 0; j < mt; j++)
+						{//在上边宽为i的蛋糕上切j刀
+							int up = a[wt][i][j];
+							int down = a[wt][ht - i][mt - 1 - j];
+							int max = up > down ? up : down;
+							if (shMin > max)
+							{//左右两边都比较小
+								shMin = max;
+							}
+						}
+					}
+					a[wt][ht][mt] = (svMin < shMin) ? svMin : shMin;
 				}
 			}
 		}
-		return (svMin < shMin) ? svMin : shMin;
+		return a[w][h][m];
 	}
 }
 
@@ -67,7 +84,7 @@ int main()
 		{
 			break;
 		}
-		cout << find(w, h, m-1) << endl;
+		cout << find(w, h, m - 1) << endl;
 	}
 	return 0;
 }

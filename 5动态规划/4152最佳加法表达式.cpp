@@ -81,6 +81,8 @@ string add(const string& s1, const string& s2)
 
 const int M = 49, N = 50; //字符串的最大长度
 const string MAX = string(N, '9'); //最大值
+//递推式：a(m,n)=min(a[m-1,i],num(i+1,n-i)}(i=m...n-1)
+//其中，num(i,n)表示从第i个数字开始的n个数字所组成的数 
 //a[m][n]表示将m个符号插入到n个数字中的最小值
 string a[M][N];
 
