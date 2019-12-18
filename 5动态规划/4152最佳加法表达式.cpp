@@ -85,30 +85,28 @@ string MAX = string(M, '9'); //最大值
 
 string find(const string& s, int m)
 {
-	if (m >= (int)s.length())
-	{//加号太多，放不下
-		return MAX;
-	}
-	else if (m == 0)
+	if (m == 0)
 	{//没有加号，原值
 		return s;
 	}
+	else if (m >= (int)s.length())
+	{//加号太多，放不下
+		return MAX;
+	}	 
 	else
 	{//加号从1开始放
 		string t1, t2, sum, min = MAX;
-		for (int i = 1; i < (int)s.length(); i++)
-		{//一个加号的位置
-			for (int j = 0; j < i && j < m; j++)
-			{//左边放几个加号
-				t1 = find(s.substr(0, i), j);
-				if (cmp(t1, min) > 0) continue;
-				t2 = find(s.substr(i), m - 1 - j);
-				if (cmp(t2, min) > 0) continue;
-				sum = add(t1, t2); //这里要用add()
-				if (cmp(min, sum) > 0) //这里要用cmp()
-				{//找到更小的值了
-					min = sum;
-				}
+		int i, len = (int)s.length();
+		for (i = 1; i <= len - m; i++)
+		{//第一个加号的位置，从左往右尝试
+			t1 = s.substr(0, i);
+			if (cmp(t1, min) > 0) continue;
+			t2 = find(s.substr(i), m - 1);
+			if (cmp(t2, min) > 0) continue;
+			sum = add(t1, t2); //这里要用add()
+			if (cmp(min, sum) > 0) //这里要用cmp()
+			{//找到更小的值了
+				min = sum;
 			}
 		}
 		return min;
