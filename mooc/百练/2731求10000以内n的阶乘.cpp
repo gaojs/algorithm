@@ -17,6 +17,7 @@ string reverse(const string &a)
 
 void append(string& s, int& t, int& c)
 {
+	//cout<<"s="<<s<<",t="<<t<<",c="<<c<<endl;
 	if(t>=10)
 	{//有进位 
 		t-=10;
@@ -29,92 +30,72 @@ void append(string& s, int& t, int& c)
 	s.push_back(t+'0');
 }
 
-string add(const string &a, const string &b)
-{
-	string s1=reverse(a), s2=reverse(b), s;
-	int len1=s1.length(), len2=s2.length();
-	int i=0, t1=0, t2=0, t=0, c=0;//carry进位 
-	
-	for(i=0;i<len1&&i<len2;i++)
-	{//处理加法 
-		t1=s1[i]-'0';
-		t2=s2[i]-'0'; 
+string add(string &a, int b, int n)
+{//加法 
+	int len=a.length(),i,t1,t2,t,c=0;
+	string s=a.substr(0,n);
+	 
+	for(i=len;i<n;i++)
+	{//容错 
+		s.push_back('0');	
+	}
+	for(i=n;i<len&&b>0;i++,b/=10)
+	{//处理a+b
+		t1=a[i]-'0';
+		t2=b%10;
 		t=t1+t2+c;
-		append(s,t,c); 
+		append(s,t,c);
 	}
-	for(;i<len1;i++)
-	{//处理s1
-		t1=s1[i]-'0';
+	for(;i<len;i++)
+	{//处理a
+		t1=a[i]-'0';
 		t=t1+c;
-		append(s,t,c); 
+		append(s,t,c);		
 	}
-	for(;i<len2;i++)
-	{//处理s2
-		t2=s2[i]-'0';
+	for(;b>0;b/=10)
+	{//处理b 
+		t2=b%10;
 		t=t2+c;
-		append(s,t,c); 
+		append(s,t,c);	
 	}
 	if(c>0)
 	{//处理进位 
 		t=c,c=0;
 		append(s,t,c); 
 	}
-	return reverse(s);
+	return s;
 }
 
-void append_sub(string& s, int& t, int& c)
-{
-	if(t<0)
-	{//有进位 
-		t+=10;
-		c=1;
-	}
-	else
-	{//无进位	
-		c=0;
-	}
-	s.push_back(t+'0');
-}
-
-string mul(const string &a, const string &b)
-{
-	string sa=a, sb=reverse(b),s;
-	int len=sb.length(),i,t,j;
-	
+string mul(const string &a, int n)
+{//乘法 
+	int len=a.length(),i,t,j;
+	string s;
+	//cout<<"a="<<a<<endl;
 	for(i=0;i<len;i++)
 	{
-		t=sb[i]-'0';
-		for(j=0;j<t;j++)
-		{
-			s=add(s,sa);
-		}
-		sa.push_back('0');
+		t=(a[i]-'0')*n;
+		//cout<<"s="<<s<<",t="<<t<<",i="<<i<<endl;
+		s=add(s,t,i);
 	}
-	if(s.length()==0)
-	{//全为0，显示0
-		s.push_back('0');
-	} 
 	return s;	
 }
 
 string factor(int n)
 {//求n的阶乘 
-	string s("1"),sn;
+	string s("1");
 	for(int i=1;i<=n;i++)
 	{
-		char a[10]={0};
-		snprintf(a,sizeof(a),"%d",i);
-		sn=string(a);
-		s=mul(s,sn);
-		//cout<<i<<","<<sn<<","<<s<<endl;
+		s=mul(s,i);
+		//cout<<i<<":"<<reverse(s)<<endl; 
 	}
-	return s;	
+	return reverse(s);	
 }
 
 int main()
-{//21!就超了 
-	int n;
+{//n=21,longlong就超了 
+	int n=6;
 	cin>>n;
-	cout<<factor(n);
+	if(n<=0) cout<<0;
+	else cout<<factor(n);
 	return 0;
 } 
