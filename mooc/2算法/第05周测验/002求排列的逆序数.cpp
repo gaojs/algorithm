@@ -1,43 +1,60 @@
-#include<iostream>
-#include<algorithm>
-#include<cstdio>
+#include <cstdio> //scanf更快 
+#include <algorithm>
+#include <iostream>
 using namespace std;
-long long a[100010] , b[100010];
-long long cnt =0;
-void jiSuan(int s,int mid,int e){
-    int p1=s,p2=mid+1,p3=0;
-    while(p1<=mid&&p2<=e){
-        if(a[p1]<=a[p2]){
-            b[p3]=a[p1];
-            p3++,p1++;
-        }
-        else{
-            cnt+=mid-p1+1;
-            b[p3]=a[p2];
-            p3++,p2++;
-        }
-    }
-    while(p1<=mid){b[p3]=a[p1]; p1++,p3++;}
-    while(p2<=e){b[p3]=a[p2]; p2++,p3++;}
-    for(int i=0;i<e-s+1;i++){
-        a[s+i]=b[i];//注意：此处不能s++！
-//因为s是参数，如果改变了参数，下面的递归就会出错！所以要在保证s不变的基础上将数组复制给原数组。
-//另外，此处也不可以将a【】初始坐标设为0，因为要s才是a数组开始的位置！
-    }
+
+const int N=100000;
+int a[N]={0};
+
+//b是begin，e是end，但(b,e)不包括e 
+long long ni(int a[], int b, int e)
+{ 	
+	if(b>=e-1)
+	{
+		//cout<<"b="<<b<<",e="<<e<<";a["<<b<<"]="<<a[b]<<",s=0"<<endl;
+		return 0;
+	}
+	else
+	{
+		long long s1,s2,s3; 
+		int mid=(b+e)/2, i,j;
+		s1=ni(a,b,mid);
+		//cout<<"b="<<b<<",e="<<e<<";mid="<<mid<<";s1="<<s1<<endl;
+		s2=ni(a,mid,e);
+		//cout<<"b="<<b<<",e="<<e<<";mid="<<mid<<";s2="<<s2<<endl;
+		sort(a+b,a+mid);
+		sort(a+mid,a+e);
+		//6		2 6 3 4 5 1
+		i=b,j=mid, s3=0;
+		while(i<mid && j<e)
+		{			
+			while(i<mid && a[i]<=a[j])
+			{
+				i++;			
+			}
+			while(j<e && a[i]>a[j])
+			{
+				s3+=mid-i;
+				//cout<<"b="<<b<<",e="<<e<<";i="<<i<<",j="<<j<<";m="<<mid<<",s="<<mid-i<<endl; 
+				j++;
+			}
+		}		
+		//cout<<"b="<<b<<",e="<<e<<";mid="<<mid<<";s3="<<s3<<endl;		
+		return s1+s2+s3;	
+	}
 }
-void erFen(int s,int e){
-    if(s>=e) return ;
-    int mid=s+(e-s)/2;
-    erFen(s,mid);
-    erFen(mid+1,e);
-    jiSuan(s,mid,e);
-}
-int main(){
-    int n;
-    scanf("%d",&n);
-    for(int i=0;i<n;i++)
-        scanf("%d",&a[i]);
-    erFen(0,n-1);
-    cout<<cnt<<endl;
-    return 0;
+
+int main()
+{
+	int n,i;
+	
+	//freopen("F:\in.txt","r",stdin);
+	cin >> n;
+	for(i=0;i<n;i++)
+	{
+		//cin>>a[i];
+		scanf("%d",&a[i]);
+	}
+	cout<<ni(a,0,n);
+	return 0;
 }

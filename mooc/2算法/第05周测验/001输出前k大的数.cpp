@@ -1,59 +1,54 @@
+#include <cstdio>
+#include <algorithm>
 #include <iostream>
 using namespace std;
 
-int a[100000]= {0}; //输入
+const int N=100000;
+int a[N]={0};
 
-void swap(int & a,int & b) {
-	int tmp;
-	tmp = a;
-	a = b;
-	b = tmp;
+void swap(int &a, int &b)
+{
+	int t=a;
+	a=b;
+	b=t;	
 }
 
-void Qsort( int a[], int s, int e ) {
-	if(s >= e)
-		return;
-	int k = a[s];
-	int i = s,j = e;
-	while (i < j) {
-		while(j > i && a[j] >= k ) j--;
-		swap(a[i], a[j]);
-		while(i < j && a[i] <= k ) i++;
-		swap(a[i], a[j]);
+//将前k大的数，都移动到最左侧 
+void move(int a[], int n, int k)
+{
+	int i=0,j=n-1;	
+	//cout<<"n="<<n<<",k="<<k<<endl;
+	while(i<j)
+	{//将比a[0]大的都移到左侧 
+		while(i<j && a[i]>=a[j]) j--;
+			swap(a[i],a[j]);
+		//cout<<"j="<<j<<" ";
+		while(i<j && a[i]>=a[j]) i++;
+			swap(a[i],a[j]);
+		//cout<<",i="<<i<<endl;
 	}
-	Qsort( a, s, i-1 );
-	Qsort( a, i+1, e );
+	if(i+1==k) return; //i+1才是数量 
+	if(i+1<k)	move(a+i+1,n-i-1,k-i-1);  
+	else if(i+1>k) move(a,i+1,k);
 }
 
-void arrangeRight(int a[],int k,int s,int e) {
-	if(s <= e) {
-		int kk = a[s];
-		int i = s,j = e;
-		while (i < j) {
-			while ( j > i && a[j] >= kk )j--;
-			swap( a[i], a[j]);
-			while ( i < j && a[i] <= kk )i++;
-			swap( a[i], a[j]);
-		}
-
-		if(e - i + 1 == k)  return;
-		else if(e - i + 1 > k)  arrangeRight(a,k,i+1,e);
-		else arrangeRight(a,k-(e-i+1),s,i-1);
+int main()
+{
+	int n,k,i;
+	
+	cin >> n;
+	for(i=0;i<n;i++)
+	{
+		//cin>>a[i];
+		scanf("%d",&a[i]);
 	}
-}
-
-int main() {
-//	freopen("F:\\aain3.txt","r",stdin);
-	int n,k,i,j,m,t;
-	cin>>n;
-	for(i=0; i<n; i++) {
-		cin>>a[i];
-	}
-	cin>>k;
-
-	arrangeRight(a,k,0,n-1);
-	Qsort(a,n-k,n-1);
-	for(j=n-1; j>=n-k; j--)
-		cout<<a[j]<<endl;
+	cin>>k;	
+	move(a,n,k);
+	sort(a,a+k,greater<int>());
+	for(i=0;i<k;i++)
+	{
+		//cout<<a[i]<<endl;
+		printf("%d\n",a[i]);
+	}	
 	return 0;
 }
