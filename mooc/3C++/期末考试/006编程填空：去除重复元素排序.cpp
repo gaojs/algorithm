@@ -22,14 +22,7 @@ int main() {
 		{
 			b.insert(a[i]);
 		}
-		set<int>::iterator it;
-		for(it=b.begin();it!=b.end();++it)
-		{
-			cout<<*it<<" ";
-		}
-		//不知std::copy何用？ 
-		vector<int> d(12);
-		vector<int>::iterator c=d.begin();
+		ostream_iterator<int> c=ostream_iterator<int>(cout, " ");
 		// 在此处补充你的代码
 		std::copy(b.begin(), b.end(), c);
 		cout << endl;
