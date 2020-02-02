@@ -8,8 +8,7 @@ string dec2bin(int x)
 	string a;
 	for(int i=30;i>=0;i--)
 	{
-		if((x>>i)&0x01) a.append("1");
-		else a.append("0");
+		a.append(1,'0'+((x>>i)&0x01));
 	} 
 	return a;
 // 在此处补充你的代码
