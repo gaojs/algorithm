@@ -6,21 +6,12 @@ class Add{
 public:
 // 在此处补充你的代码
 	T t;
-	
-	Add(T tt):t(tt)
+    Add(T tt) :t(tt) {}
+    
+    T operator()(T x, T y) 
 	{
-	}
-	
-	Add(T& a, T& b)
-	{//转换构造函数
-		t=a+b-t;
-	}
-	
-	operator T()
-	{//类型转换函数（自定义数据类型=>基本数据类型）
-		return t;
-	}
-	//friend ostream&<<()
+        return (x + y - t);
+    }
 // 在此处补充你的代码
 };
 

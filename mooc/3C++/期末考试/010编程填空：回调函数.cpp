@@ -17,18 +17,12 @@ class MyFunc
 private:
 	int v;
 public:
-	MyFunc(int n)
-	{//带单参数的构造函数（基本数据类型=>自定义数据类型）
-		v=n;
-	}
-	operator MyFunc()
-	{//用户自定义类的强制类型转换
-		return v;
-	}
-	operator int()
-	{//类型转换函数（自定义数据类型=>基本数据类型）
-		return v;
-	}
+    MyFunc(int i):v(i){}
+    
+	int operator()(int m) 
+	{
+        return pow(m, v);
+    }
 // 在此处补充你的代码
 };
 

@@ -12,13 +12,11 @@ public:
 		cout<< num <<endl;
 	}
 // 在此处补充你的代码
-	A(const A& b) 
-	{//复制构造函数 Complex c2(c1);Complex c2 = c1;
-		num--;
-	}
-	A& operator=(const A& a)
-	{//赋值构造函数
-	}
+	void func() const 
+	{//不仅仅是函数内不修改变量啊！ 
+        num--;
+        cout << num << endl;
+    }
 // 在此处补充你的代码
 };
 
