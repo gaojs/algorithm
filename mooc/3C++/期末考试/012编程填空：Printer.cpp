@@ -8,23 +8,22 @@ class Printer
 {
 // 在此处补充你的代码
 public:
-	Printer(int x){}
+	int n;
+	Printer(int x):n(x){}
 	
-	Printer(int x, int y)
-	{
-		if(y>x)
-		{
-			cout<<y<<" ";
-		}		
-	}
-	
-	Printer(int x, string s)
-	{
-		if(s.length()>x)
-		{
-			cout<<s<<" ";
-		}		
-	}
+	void operator()(int a) {
+        if (a > n)
+        {
+            cout << a << ",";
+		}
+    }
+    
+    void operator()(string a) {
+        if (a.length() > n)
+        {
+            cout << a << ",";
+		}
+    }
 }; 
 // 在此处补充你的代码
 
