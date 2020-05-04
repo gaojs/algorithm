@@ -16,7 +16,7 @@ void inOrder(struct TreeNode* root, struct TreeNode**prev,
 	} else {	    
 	    inOrder(root->left, prev, errMin, errMax);
 	    // 有前驱节点，才将当前节点跟前驱节点，进行比较 
-	    if (*prev != NULL && (*prev)->val > root->val) { // 有错 
+	    if (*prev != NULL && (*prev)->val > root->val) { // 逆序 
 	        if (*errMax == NULL) { 
 	            *errMax = *prev; // 首次赋值 
 	        } else if ((*prev)->val > (*errMax)->val) {
