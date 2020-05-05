@@ -34,20 +34,20 @@ int sumNumbers(struct TreeNode* root)
 void createTree(struct TreeNode **root, int *a, int size)
 { 
 	if (root == NULL) {
-		return; // ²ÎÊýÓÐÎó 
+		return; // Â²ÃŽÃŠÃ½Ã“ÃÃŽÃ³ 
 	} else if(a == NULL || size == 0) {
 		*root = NULL;
-		return; // ²ÎÊýÓÐÎó 
-	} else { // ´´½¨ ¶þ²æÊ÷ 
+		return; // Â²ÃŽÃŠÃ½Ã“ÃÃŽÃ³ 
+	} else { // Â´Â´Â½Â¨ Â¶Ã¾Â²Ã¦ÃŠÃ· 
 		struct TreeNode* n = (struct TreeNode*)malloc(sizeof(struct TreeNode));
-		if (n == NULL) { // ÄÚ´æÉêÇëÊ§°Ü 
+		if (n == NULL) { // Ã„ÃšÂ´Ã¦Ã‰ÃªÃ‡Ã«ÃŠÂ§Â°Ãœ 
 			*root = NULL; 
 			return;
 		} else {
-			#define MAX_NODE_COUNT 100 // ÈÏÎª×ã¹»´óÁË 
+			#define MAX_NODE_COUNT 100 // ÃˆÃÃŽÂªÃ—Ã£Â¹Â»Â´Ã³ÃÃ‹ 
 			struct TreeNode *que[MAX_NODE_COUNT] = { 0 }; 
-			int head = 0, tail = 0; // Ä£Äâ¶ÓÁÐ 		
-			int i = 0; // Ë÷Òý 
+			int head = 0, tail = 0; // Ã„Â£Ã„Ã¢Â¶Ã“ÃÃ 		
+			int i = 0; // Ã‹Ã·Ã’Ã½ 
 			n->val = a[i++];
 			n->left = NULL;
 			n->right = NULL;
@@ -61,7 +61,7 @@ void createTree(struct TreeNode **root, int *a, int size)
 						int v = a[i++];
 						if (v != INT_MIN) {
 							n = (struct TreeNode*)malloc(sizeof(struct TreeNode));
-							if (n == NULL) { // ÄÚ´æÉêÇëÊ§°Ü 
+							if (n == NULL) { // Ã„ÃšÂ´Ã¦Ã‰ÃªÃ‡Ã«ÃŠÂ§Â°Ãœ 
 								return;
 							} else {
 								n->val = v;
@@ -76,7 +76,7 @@ void createTree(struct TreeNode **root, int *a, int size)
 						int v = a[i++];
 						if (v != INT_MIN) {
 							n = (struct TreeNode*)malloc(sizeof(struct TreeNode));
-							if (n == NULL) { // ÄÚ´æÉêÇëÊ§°Ü 
+							if (n == NULL) { // Ã„ÃšÂ´Ã¦Ã‰ÃªÃ‡Ã«ÃŠÂ§Â°Ãœ 
 								return;
 							} else {
 								n->val = v;
@@ -98,7 +98,7 @@ void preOrderPrint(struct TreeNode* root)
 {
 	if (root == NULL) {
 		return;
-	} else { // ÏÈ¸ù ±éÀú 
+	} else { // ÃÃˆÂ¸Ã¹ Â±Ã©Ã€Ãº 
 		printf("%d,", root->val);
 		preOrderPrint(root->left);
 		preOrderPrint(root->right);
@@ -109,7 +109,7 @@ void inOrderPrint(struct TreeNode* root)
 {
 	if (root == NULL) {
 		return;
-	} else { // ÖÐ¸ù ±éÀú 
+	} else { // Ã–ÃÂ¸Ã¹ Â±Ã©Ã€Ãº 
 		inOrderPrint(root->left);
 		printf("%d,", root->val);
 		inOrderPrint(root->right);
@@ -120,7 +120,7 @@ void postOrderPrint(struct TreeNode* root)
 {
 	if (root == NULL) {
 		return;
-	} else { // ÏÈ¸ù ±éÀú 
+	} else { // ÃÃˆÂ¸Ã¹ Â±Ã©Ã€Ãº 
 		postOrderPrint(root->left);
 		postOrderPrint(root->right);
 		printf("%d,", root->val);
@@ -131,7 +131,7 @@ void freeTree(struct TreeNode* root)
 {
 	if (root == NULL) {
 		return;
-	} else { // ºó¸ù Ïú»Ù 
+	} else { // ÂºÃ³Â¸Ã¹ ÃÃºÂ»Ã™ 
 		freeTree(root->left);
 		root->left = NULL; 
 		freeTree(root->right);
@@ -143,8 +143,8 @@ void freeTree(struct TreeNode* root)
 
 int main()
 {
-	// int a[] = {}; // 0±íÊ¾null 
-	// int a[] = {1,2,3}; // 0±íÊ¾null
+	// int a[] = {}; // 0Â±Ã­ÃŠÂ¾null 
+	// int a[] = {1,2,3}; // 0Â±Ã­ÃŠÂ¾null
 	int a[] = {4,9,0,5,1}; 
 	int size = sizeof(a) / sizeof(a[0]);
 	printf("size=%d\n", size);	
