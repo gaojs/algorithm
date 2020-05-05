@@ -1,41 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <limits.h>
 
+#define MAX(x, y) (x) > (y) ? (x) : (y)
 int maxProfit(int* a, int n)
 {
 	if (a == NULL || n ==0) {
 		return 0; // 参数有误 
 	}
-	// p[i][j]为第i天到第j天的最大收益 
-	int *p = (int*)calloc(sizeof(int), n * n);
-	if (p == NULL) { // 内存申请失败 
-		return 0;
-	}
-	for (int i = 0; i < n; i++) {
-		int min = a[i]; // 二重循环，暴力破解 
-		for (int j = i + 1; j < n; j++) {
-			if (min > a[j]) { // 最低价 
-				min = a[j];
+	// dp[n][k][f]为第n天第k次购买后的最大收益 
+	// f = 0, 为不持有股票， f = 1, 为持有股票 
+	int K = 3; // k = 2 可以买2次 
+	int dp[n][K][2]; // = {0}; 
+	memset(dp, 0, sizeof(dp));	
+	for(int i = 0; i < n; i++) { // 第i天 
+		for(int k = 1; k < K; k++) { // 第k次操作 
+			if(i == 0) { // 第0天，即刚开始的那天 
+				dp[0][k][0] = 0; // 不持有，收益为0 
+				dp[0][k][1] = -a[0]; // 持有，收益为负 
+				continue;
 			}
-			int d1 = p[i * n + j - 1]; // 之前卖 
-			int d2 = a[j] - min; // 当天卖 
-			p[i * n + j] = d1 > d2 ? d1 : d2;
-			printf("(%d-%d)=%d\n", i, j, p[i * n + j]);
-		}		
+			// 第i天，不持有：前1天不持有，当天无操作；前1天持有，当天卖出 
+			dp[i][k][0] = MAX(dp[i-1][k][0], dp[i-1][k][1] + a[i]);
+			// 第i天，持有：前1天持有，当天无操作；前1天不持有，当天买入
+			dp[i][k][1] = MAX(dp[i-1][k][1], dp[i-1][k-1][0] - a[i]);
+		}
 	}
-	int max = p[0 * n + n - 1]; // 1天的最大值
-	for (int i = 0; i < n; i++) { // 查找2天的最大值 
-		int d1 = p[0 * n + i]; // 前1天 
-		int d2 = p[i * n + n - 1]; // 后1天
-		int t = d1 + d2;
-		if (max < t) {
-			printf("%d:(%d-%d)=%d\n", i, d1, d2, t);
-			max = t;
-		}	
-	}	
-	free(p); 
-	return max;
+	return dp[n-1][K-1][0]; // 最后1天，不持有股票 
 }
 
 int main()
