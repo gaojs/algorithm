@@ -9,21 +9,39 @@ struct TreeNode {
 	struct TreeNode *right;
 };
 
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+int maxSum(struct TreeNode* root, int *maxValue)
+{
+    if (root == NULL || maxValue == NULL) {
+        return INT_MIN; // 最小值 
+    }
+    int maxLeft = maxSum(root->left, maxValue);
+    int maxRight = maxSum(root->right, maxValue);    
+    *maxValue = MAX(*maxValue, root->val);
+    if (maxLeft != INT_MIN && maxRight != INT_MIN) {
+        int sum = root->val + maxLeft + maxRight;
+        *maxValue = MAX(*maxValue, sum);
+    }
+    if (maxLeft != INT_MIN) { // 左子树有值 
+        maxLeft += root->val;
+        *maxValue = MAX(*maxValue, maxLeft);
+    } else {
+        maxLeft = root->val;
+    }
+    if (maxRight != INT_MIN) { // 右子树边有值 
+        maxRight += root->val;
+        *maxValue = MAX(*maxValue, maxRight);
+    } else {
+        maxRight = root->val;
+    }
+    return MAX(MAX(root->val, maxLeft), maxRight); 
+}
+
 int maxPathSum(struct TreeNode* root)
 {
-	if (root == NULL) {
-		return INT_MIN;
-	}
-	int left = maxPathSum(root->left);
-	int right = maxPathSum(root->right);
-	int max = root->val;
-	
-	max = max > left ? max : left;
-	max = max > right ? max : right;
-	
-	max = root->val > (root->val + left) ? root->val : (root->val + left);
-	max = root->val > (root->val + right) ? max : (root->val + right);
-	return max;
+    int maxValue = INT_MIN; // 最小值
+    maxSum(root, &maxValue);
+    return maxValue;
 }
 
 void createTree(struct TreeNode **root, int *a, int size)
@@ -138,9 +156,11 @@ void freeTree(struct TreeNode* root)
 
 int main()
 {
-	//int a[] = {}; // 0表示null 
-	//int a[] = {1,2,3}; // 0表示null
-	int a[] = {-10,9,20,INT_MIN,INT_MIN,15,7}; 
+	// int a[] = {}; // 0表示null 
+	// int a[] = {1,2,3}; // 6
+	// int a[] = {-10,9,20,INT_MIN,INT_MIN,15,7}; //42 
+	// int a[] = {1,2,INT_MIN,3,INT_MIN,4,INT_MIN,5}; // 15 
+	int a[] = {9,6,-3,INT_MIN,INT_MIN,-6,2,INT_MIN,INT_MIN,2,INT_MIN,-6,-6,-6}; // 16 
 	int size = sizeof(a) / sizeof(a[0]);
 	printf("size=%d\n", size);	
 	struct TreeNode *root = NULL;
@@ -148,6 +168,8 @@ int main()
 	
 	printf("\nPre Order:");
 	preOrderPrint(root);
+	printf("\nIn Order:");
+	inOrderPrint(root);
 	printf("\n");
 	
 	printf("\nMax=%d", maxPathSum(root));
