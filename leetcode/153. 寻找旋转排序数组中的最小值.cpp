@@ -11,7 +11,7 @@ int findMin(int*a, int n)
 		return a[0];
 	}
 	int left = 0, right = n - 1;
-	while (left <= right) {
+	while (left < right) {
 		int mid = left + (right - left)/ 2;
 		// printf("(%d-%d)=%d=[%d]\n", left, right, mid, a[mid]);
 		if (mid + 1 < n && a[mid] > a[mid + 1]) {
