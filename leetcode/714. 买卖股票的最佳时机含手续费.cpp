@@ -9,7 +9,7 @@ int maxProfit(int* a, int n, int fee)
 	if (a == NULL || n ==0) {
 		return 0; // 参数有误 
 	}
-	// dp[n][f]为第n天第k次购买后的最大收益 
+	// dp[n][f]为第n天的最大收益 
 	// f = 0, 为不持有股票， f = 1, 为持有股票 
 	int dp[n][2]; // = {0}; 
 	memset(dp, 0, sizeof(dp));	
