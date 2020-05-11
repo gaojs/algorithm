@@ -26,7 +26,7 @@ bool wordBreak(char *s, char **wd, int n)
 	if (s == NULL || wd == NULL || n == 0) {
 		return false;
 	}
-	int count = 128; 
+	const int count = 128; 
 	int sMap[count];// = {0};
 	int sLen = strlen(s);
 	memset(sMap, 0, sizeof(sMap));
@@ -52,7 +52,7 @@ bool wordBreak(char *s, char **wd, int n)
 
 int main()
 {
-	char s[] = "leetcode", *wd[] = {"leet", "code"}; // true
+	const char s[] = "leetcode", *wd[] = {"leet", "code"}; // true
 	// char s[] = "applepenapple", *wd[] = {"apple", "pen"}; // true
 	// char s[] = "catsandog", *wd[] = {"cats", "dog", "sand", "and", "cat"}; // false
 	/* char s[] = "bccdbacdbdacddabbaaaadababadad", 
@@ -71,7 +71,7 @@ int main()
 	for (int i = 0; i < n; i++) {
 		printf("%s\n", wd[i]);
 	}*/
-	if (wordBreak(s, wd, n)) {
+	if (wordBreak((char*)s, (char**)wd, n)) {
 		printf("true");
 	} else {
 		printf("false");		
