@@ -3,43 +3,38 @@
 #include <string.h>
 #include <limits.h>
 
-bool dfs(int** a, int n, int* col, int k, int r, int c) {
-    if (a == NULL || n == 0 || col == NULL) {
-        return false;
-    }
-    // printf("(%d, %d)=%d\n", r, c, k);
-    if (k + a[r][c] <= 0) {
-        return false; // 健康值不够了
-    }
-    if (r == n - 1 && c == col[n - 1] - 1) {
-        return true; // 达到目的地
-    }
-    if (r < n - 1) { // 往下走走看
-        if (dfs(a, n, col, k + a[r][c], r + 1, c)) {
-            return true;
-        }
-    }
-    if (c < col[n - 1] - 1) { // 往右走走看
-        if (dfs(a, n, col, k + a[r][c], r, c + 1)) {
-            return true;
-        }
-    }
-    return false;
+int min(int a, int b) {
+    return (a < b) ? a : b;
 }
 
-int calculateMinimumHP(int** a, int n, int* col)
-{
-    if (a == NULL || n == 0 || col == NULL) {
-        return 0;
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+#define N 100
+int dp[N][N] = { 0 };
+
+int calculateMinimumHP(int** a, int n, int* col) {
+    int R = n, C = *col;
+    
+    memset(dp, 0, sizeof(dp));
+    /* dp[i][j]:到达第i行第j个格子前需要的最低hp */
+    /* dp[i][j] + a[i][j] >= dp[i + 1][j] */
+    /* dp[i][j] + a[i][j] >= dp[i][j + 1] */
+    /* 上述两个式子满足其一即可，以及要保证任何时候的dp都是大于0的 */
+    dp[R - 1][C - 1] = 1 - min(a[R - 1][C - 1], 0); // 最后一格
+    for (int r = R - 2; r >= 0; r--) { // 最后一列 
+        dp[r][C - 1] = max(dp[r + 1][C - 1] - a[r][C - 1], 1);
     }
-    for (int k = 1;; k++) {
-        if (dfs(a, n, col, k, 0, 0)) {
-            return k;
-        } else {
-            printf("%d ", k);
+    for (int c = C - 2; c >= 0; c--) { // 最后一行 
+        dp[R - 1][c] = max(dp[R - 1][c + 1] - a[R - 1][c], 1);
+    }
+    for (int r = R - 2; r >= 0; r--) {
+        for (int c = C - 2; c >= 0; c--) {
+            dp[r][c] = max(min(dp[r + 1][c], dp[r][c + 1]) - a[r][c], 1);
         }
     }
-    return 0;
+    return dp[0][0];
 }
 
 int main()
