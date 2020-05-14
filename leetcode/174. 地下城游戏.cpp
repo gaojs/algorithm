@@ -11,28 +11,34 @@ int max(int a, int b) {
     return (a > b) ? a : b;
 }
 
-#define N 100
+#define N 200
 int dp[N][N] = { 0 };
 
 int calculateMinimumHP(int** a, int n, int* col) {
     int R = n, C = *col;
-    
+
     memset(dp, 0, sizeof(dp));
     /* dp[i][j]:到达第i行第j个格子前需要的最低hp */
     /* dp[i][j] + a[i][j] >= dp[i + 1][j] */
     /* dp[i][j] + a[i][j] >= dp[i][j + 1] */
-    /* 上述两个式子满足其一即可，以及要保证任何时候的dp都是大于0的 */
+    /* 上述两个式子满足其一即可，还要保证任何时候的dp都大于0 */
     dp[R - 1][C - 1] = 1 - min(a[R - 1][C - 1], 0); // 最后一格
+    printf("(%d,%d)=%d\n", R - 1, C - 1, dp[R - 1][C - 1]);
     for (int r = R - 2; r >= 0; r--) { // 最后一列 
         dp[r][C - 1] = max(dp[r + 1][C - 1] - a[r][C - 1], 1);
+        printf("(%d,%d)=%d\n", r, C - 1, dp[r][C - 1]);
     }
     for (int c = C - 2; c >= 0; c--) { // 最后一行 
         dp[R - 1][c] = max(dp[R - 1][c + 1] - a[R - 1][c], 1);
+        printf("(%d,%d)=%d ", R - 1, c, dp[R - 1][c]);
     }
+    printf("\n");
     for (int r = R - 2; r >= 0; r--) {
         for (int c = C - 2; c >= 0; c--) {
             dp[r][c] = max(min(dp[r + 1][c], dp[r][c + 1]) - a[r][c], 1);
+            printf("(%d,%d)=%d ", r, c, dp[r][c]);
         }
+        printf("\n");
     }
     return dp[0][0];
 }
@@ -53,12 +59,13 @@ int main()
     int *a[] = { r1, r2 };
     */ // 1
     /************************
+    */ // 3
     int r1[] = { 1, -3, 3 };
     int r2[] = { 0, -2, 0 };
     int r3[] = { -3, -3, -3 };
     int col[] = { 3, 3, 3 };
     int *a[] = { r1, r2, r3 };
-    */ // 3
+    /************************
     int a[][10] = {
         {29, -78, -52, -1, -38, 6, 24, -45, 35, -29},
         {-48, -48, -52, 2, -96, -78, -96, 40, -78, -73},
@@ -168,8 +175,10 @@ int main()
         p[i] = a[i];
         col[i] = c;
     }
-    //int ret = calculateMinimumHP(a, n, col);
     int ret = calculateMinimumHP(p, n, col);
+    */ // 3
+    int n = sizeof(a) / sizeof(a[0]);
+    int ret = calculateMinimumHP(a, n, col);
     printf("%d", ret);
     return 0;
 }
