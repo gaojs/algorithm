@@ -3,7 +3,9 @@
 #include <string.h>
 
 #define N 100000
-int dp[N] = { 0 }; // dp[i][j]是i到j的最大值
+int left[N] = { 0 }; // left[i]从(i/k)*k到i的最大值
+int right[N] = { 0 }; // right[i]从(i/k+1)*k到i的最大值
+int result[N] = { 0 }; // max
 #define max(a,b) ((a)>(b)?(a):(b))
 
 void print(int* a, int n)
@@ -18,20 +20,29 @@ int* maxSlidingWindow(int* a, int n, int k, int* returnSize) {
     if (a == NULL || n <= 0 || k <= 0 || returnSize == NULL) {
         return NULL;
     }
+    // print(a, n);
     for (int c = 0; c < n; c++) {
-        // 初始状态，dp[c]表示c到c的最大值
-        dp[c] = a[c]; 
-    }
-    // print(dp, n);
-    for (int r = 1; r < k; r++) {
-        for (int c = 0; c < n - r; c++) {
-            // dp[c]表示c到c+r的最大值 
-            dp[c] = max(dp[c], a[c + r]); 
+        if (c % k == 0) {
+            left[c] = a[c];
+        } else {
+            left[c] = max(left[c - 1], a[c]);
         }
-        // print(dp, n - r);
     }
+    // print(left, n);
+    for (int c = n - 1; c >= 0; c--) {
+        if (c % k == k - 1 || c == n - 1) {
+            right[c] = a[c];
+        } else {
+            right[c] = max(right[c + 1], a[c]);
+        }
+    }
+    // print(right, n);
+    for (int c = 0; c < n - k + 1; c++) {
+        result[c] = max(right[c], left[c + k - 1]);
+    }
+    // print(result, n - k + 1);
     *returnSize = n - k + 1;
-    return dp;
+    return result;
 }
 
 int main()
