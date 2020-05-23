@@ -11,10 +11,16 @@ char *lastSubstring(char *s)
 		if (len <= 1) {
 			return s;
 		}
-		char *last = s;
-		for (char *p = s+1; *p; p++) {
-			if(strcmp(last, p) < 0) {
-				last = p;
+		char *last = &s[len - 1];
+		bool equal = true; // 默认是相等 
+		for (char *p = last - 1; p >= s; p--) {
+			if(equal && *p == *last) { // 字符相等 
+				last = p; // 往前移动 
+			} else {
+				equal = false; 
+				if(strcmp(p, last) > 0) {
+					last = p;					
+				}
 			}
 		}
 		return last;
@@ -23,7 +29,8 @@ char *lastSubstring(char *s)
 
 int main()
 {
-	const char *s = "abab"; // bab 
+	// const char *s = "abab"; // bab 
+	const char *s = "zrziy"; // zrziy 
 	s = lastSubstring((char*)s);
 	printf("%s", s);
 	return 0;
