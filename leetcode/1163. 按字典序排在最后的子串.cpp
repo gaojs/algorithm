@@ -25,6 +25,7 @@ int main()
 {
 	// const char *s = "abab"; // bab 
 	const char *s = "zrziy"; // zrziy 
+	const char *s = "aaabbbaaa"; // bbbaaa 
 	s = lastSubstring((char*)s);
 	printf("%s", s);
 	return 0;
