@@ -195,9 +195,7 @@ void freeTree(struct TreeNode* root)
 
 int main()
 {
-	//int a[] = {}; // 0表示null 
-	//int a[] = {3,9,20,0,0,15,7}; // 0表示null
-	int a[] = {0,-4,-3,INT_MIN,-1,8,INT_MIN,INT_MIN,3,INT_MIN,-9,-2,INT_MIN,4}; 
+	int a[] = {1,INT_MIN,3,2,4,INT_MIN,5,6}; // INT_MIN表示null
 	int size = sizeof(a) / sizeof(a[0]);
 	printf("size=%d\n", size);	
 	struct TreeNode *root = NULL;
