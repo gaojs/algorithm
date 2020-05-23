@@ -62,7 +62,7 @@ int* beautifulArray(int n, int* returnSize)
 				*returnSize = 0;
 				return NULL;
 			}
-			for (int i = 0; i < n; i++) {
+			for (int i = n - 1; i >= 0; i--) {
 				if (ok(a, n - 1, i, n)) {
 					int *p = insert(a, n - 1, i, n);
 					if (p != NULL) { // ÕÒµ½1¸ö 
@@ -81,14 +81,17 @@ int* beautifulArray(int n, int* returnSize)
 
 int main()
 {
-	int n = 5;
-	int returnSize = 0;
-	int *a = beautifulArray(n, &returnSize);
-	if (a != NULL) {
-		for (int i = 0; i < returnSize; i++) {
-			printf("%d ", a[i]);
+	for (int n = 1; n < 101; n++) {		
+		int returnSize = 0;
+		int *a = beautifulArray(n, &returnSize);
+		if (a != NULL) {
+			printf("%d: ", n);
+			for (int i = 0; i < returnSize; i++) {
+				printf("%d ", a[i]);
+			}
+			printf("\n");
+			free(a);
 		}
-		free(a);
 	}
 	return 0;
 } 
