@@ -9,21 +9,27 @@ int cmp(const void*a, const void*b)
 
 void sort(char a[], int n) {
 	// 找最小字符串，环形搜索 
-	char *min = strdup(a);
+	int min = 0; // 最小字符串的起始点 
 	for (int i = 1; i < n; i++) {
-		char *t = (char*)calloc(n+1, sizeof(char));
-		memcpy(t, &a[i], n - i);
-		memcpy(t + n - i, a, i);
-		if (strcmp(min, t) > 0) {
-			free(min);
-			min = t;
-		} else {
-			free(t);
+		int t = -1; // 比较结果 
+		for( int k = 0; k < n; k++) {
+			t = a[(min + k) % n];
+			t -= a[(i + k) % n];
+			if (t != 0) { // 有大小 
+				break;
+			} 			
 		}
+		if (t > 0) {
+			min = i;
+		}	
 	}
+	// printf("min=%d\n", min);
 	// 调整成最小的字符串 
-	memcpy(a, min, n);
-	free(min);
+	for (int i = 0; i < min; i++) {
+		char c = a[0]; // 往前移动一位 
+		memmove(&a[0], &a[1], n - 1);
+		a[n - 1] = c;
+	}
 }		
 
 char *orderlyQueue(char *s, int k)
