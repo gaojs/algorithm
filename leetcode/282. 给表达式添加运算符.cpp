@@ -1,72 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <math.h>
 
-#define MAX_COUNT 10000 // 足够大
-
-long long num[MAX_COUNT] = {0};
-char op[MAX_COUNT] = {0};
+#define MAX_COUNT 10000 // 解的个数足够大
+#define NUM_COUNT 100 // 操作数的个数足够大
+long long num[NUM_COUNT] = {0};
 
 long long calc(char *a)
 { // 计算表达式a的值
 	// 将数字和符号，入栈
 	memset(num, 0, sizeof(num));
-	memset(op, 0, sizeof(op));
 	int numCnt = 0, opCnt = 0;
 	long long value = 0;
+    char oper = '+';
 	int len = strlen(a);
 	for (int i = 0; i < len; i++) {
-		if (a[i] <= '9' && a[i] >= '0') {
-			value = value * 10 + (a[i] - '0');
-			if (a[i] == '0') { // 05这种以0开头的数字不符合要求
-				if ((i==0 || (i > 0 && (a[i-1] > '9' || a[i-1] < '0')))
-					&& (i < len -1 && (a[i+1] <= '9' && a[i+1] >= '0'))) {
-					return INT_MIN; // 发现格式不对，直接返回
-				}
+		if (a[i] == '0') { // 05这种以0开头的数字不符合要求
+			if (i < len - 1 && isdigit(a[i+1])) {
+				return INT_MIN; // 发现格式不对，直接返回
 			}
-		} else if (a[i] == '*' || a[i] == '+' || a[i] == '-') {
-			num[numCnt++] = value;
-			op[opCnt++] = a[i];
+		}
+		if (isdigit(a[i])) {
+			for (; isdigit(a[i]); i++) { // 计数数值
+				value = value * 10 + (a[i] - '0');
+			}
+		}
+		if (!isdigit(a[i]) || i == len -1) {
+			switch(oper) {
+			case '+':
+				num[numCnt++] = value;
+				break;
+			case '-':
+				num[numCnt++] = -value;
+				break;
+			case '*':
+				value *= num[numCnt - 1];
+				num[numCnt - 1] = value;
+				break;
+			default:
+				return INT_MIN; // 发现格式不对，直接返回
+			}
 			value = 0;
-		} else {
-			return INT_MIN; // 发现格式不对，直接返回
-		}
+			oper = a[i];
+		} 
 	}
-	num[numCnt++] = value;
-	// 先计算乘法
-	for (int i = 0; i < opCnt; i++) {
-		if (op[i] == '*') {
-			num[i] *= num[i + 1];
-			if (opCnt - i - 1 > 0) {
-				memmove(&num[i+1], &num[i+2], sizeof(num[0]) * (numCnt - i - 2));
-				memmove(&op[i], &op[i+1], sizeof(op[0]) * (opCnt - i - 1));
-			}
-			num[numCnt - 1] = 0;
-			op[opCnt - 1] = 0;
-			numCnt--;
-			opCnt--;
-			i--;
-		}
+	value = num[numCnt - 1];
+	for (numCnt--; numCnt > 0; numCnt--) {
+		value += num[numCnt - 1];
 	}
-	// 在计算加法和减法
-	for (int i = 0; i < opCnt; i++) {
-		if (op[i] == '+') {
-			num[i] += num[i + 1];
-		} else {
-			num[i] -= num[i + 1];
-		}
-		if (opCnt - i - 1 > 0) {
-			memmove(&num[i+1], &num[i+2], sizeof(num[0]) * (numCnt - i - 2));
-			memmove(&op[i], &op[i+1], sizeof(op[0]) * (opCnt - i - 1));
-		}
-		num[numCnt - 1] = 0;
-		op[opCnt - 1] = 0;
-		numCnt--;
-		opCnt--;
-		i--;
-	}
-	return num[0];
+	return value;
 }
 
 char* newStr(char *a, int len, int pos, const char*op)
@@ -80,7 +64,7 @@ char* newStr(char *a, int len, int pos, const char*op)
 
 void dfs(char *a, int pos, int target, char**p, int* returnSize)
 {
-	if (a == NULL || p == NULL || returnSize == NULL) {
+	if (a == NULL || a[0] == 0 || p == NULL || returnSize == NULL) {
 		return;
 	} 
 	int len = strlen(a);
@@ -128,7 +112,7 @@ int main()
 	char a[] = "232"; // 2*3+2, 2+3*2
 	int target = 8;
 	char a[] = "105"; // 1*0+5, 10-5
-	int target = 5;
+	int target = 5; 
 	char a[] = "00"; // 0+0, 0-0, 0*0
 	int target = 0; 
 	char a[] = "3456237490"; // ""
@@ -139,6 +123,7 @@ int main()
 	int target = 9; */
 	char a[] = "2147483647";
 	int target = 2147483647;
+	/*************************/
 	int returnSize = 0;
 	char **p = addOperators(a, target, &returnSize);
 	if (p != NULL) {
@@ -147,7 +132,7 @@ int main()
 			free(p[i]);
 		}
 		free(p);
-	} 
+	}  
 	// char s[] = {"2*3+2"};
 	// char s[] = {"2+3*2"};
 	// char s[] = {"1*0+5"};
