@@ -91,7 +91,7 @@ void display(int N)
 
 int networkDelayTime(int**a, int n, int*col, int N, int K)
 {
-	if (a == NULL || n <= 0 || N <= 0 || K >= N) {
+	if (a == NULL || n <= 0 || N <= 0 || K > N) {
 		return -1;
 	} else if (N > NODE_COUNT) {
 		printf("overflow");
@@ -126,8 +126,10 @@ int networkDelayTime(int**a, int n, int*col, int N, int K)
 
 int main()
 {
-	int p[][3] ={{2,1,1},{2,3,1},{3,4,1}};
-	int *a[] = {p[0],p[1],p[2]}, N = 4, K = 2; // 2
+	// int p[][3] ={{2,1,1},{2,3,1},{3,4,1}};
+	// int *a[] = {p[0],p[1],p[2]}, N = 4, K = 2; // 2
+	int p[][3] ={{1,2,1},{2,1,3}};
+	int *a[] = {p[0],p[1]}, N = 2, K = 2; // 3 
 	int col[] = {3,3,3};
 	int n = sizeof(a) / sizeof(a[0]);
 	printf("%d", networkDelayTime(a, n, col, N, K));
