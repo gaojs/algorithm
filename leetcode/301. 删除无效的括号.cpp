@@ -129,6 +129,13 @@ bool bfs(char *s, char **result, int *returnSize)
                         que[tail++] = strdup(tstr);
                     }
                 }
+            } else { // 删除所有
+                while (head < tail) {
+                    char *str = que[head]; // 取串
+                    que[head++] = 0; // 取过置0
+                    free(str);
+                }
+                break;
             }
         }
         // 丢弃不要
@@ -160,7 +167,8 @@ int main()
     // char a[] = "(((((";
     // char a[] = ")))((()(";
     // char a[] = "(((((())"; // 超时
-    char a[] = "())v)(()(((((())"; // 超时
+    // char a[] = "())v)(()(((((())"; // 超时
+    char a[] = "l)((j())()()))(("; // 超时
     int returnSize = 0;
     char **p = removeInvalidParentheses(a, &returnSize);
     if (p != NULL) {
