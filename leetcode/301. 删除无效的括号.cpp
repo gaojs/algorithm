@@ -6,10 +6,11 @@
 
 #define strdup _strdup
 
-#define MAX_COUNT 1000000
+#define MAX_COUNT 10000 // 足够大了
+#define MAX_STR_LEN 50 // 够大了
 // 队列，广度搜索的辅助数据结构
 char *que[MAX_COUNT] = { 0 };
-char tstr[MAX_COUNT] = { 0 };
+char tstr[MAX_STR_LEN] = { 0 };
 
 bool isValid(char *s)
 {
@@ -101,8 +102,7 @@ bool bfs(char *s, char **result, int *returnSize)
                     if (str[i] != '(' && str[i] != ')') {
                         continue; // 其他字符，保留
                     }
-                    memset(tstr, 0, sizeof(tstr));
-                    strncpy(tstr, str, sizeof(tstr) - 1);
+                    memcpy(tstr, str,  len + 1);
                     memmove(&tstr[i], &tstr[i + 1], len - i);
                     if (!exist(que, head, tail, tstr)) {
                         que[tail++] = strdup(tstr);
@@ -122,8 +122,7 @@ bool bfs(char *s, char **result, int *returnSize)
                     if (str[i] != '(' && str[i] != ')') {
                         continue; // 其他字符，保留
                     }
-                    memset(tstr, 0, sizeof(tstr));
-                    strncpy(tstr, str, sizeof(tstr) - 1);
+                    memcpy(tstr, str, len + 1);
                     memmove(&tstr[0], &tstr[1], len - i);
                     if (!exist(que, head, tail, tstr)) {
                         que[tail++] = strdup(tstr);
