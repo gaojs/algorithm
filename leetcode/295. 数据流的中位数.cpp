@@ -3,7 +3,7 @@
 #include <string.h>
 #include <limits.h>
 
-#define MAX_COUNT 10000
+#define MAX_COUNT 100000
 typedef struct {
     int a[MAX_COUNT];
     int cnt;
@@ -17,6 +17,22 @@ MedianFinder* medianFinderCreate()
     return &smf;
 }
 
+int findPos(int *a, int n, int k)
+{ // 二分查找 
+	int left = 0, right = n - 1;
+	while (left <= right) {
+		int m = left + (right - left) / 2;
+		if (a[m] == k) { // 找到了 
+			return m;
+		} else if (a[m] < k) {
+			left = m + 1;
+		} else {
+			right = m - 1;
+		}
+	}
+	return left;
+} 
+ 
 void medianFinderAddNum(MedianFinder* mf, int num) 
 {
 	if(mf == NULL) {
@@ -24,13 +40,13 @@ void medianFinderAddNum(MedianFinder* mf, int num)
 	} else if (mf->cnt >= MAX_COUNT) {
 		printf("overflow");
 	} else {
-		mf->a[mf->cnt] = num;
+		int pos = findPos(mf->a, mf->cnt, num);
+		if ((mf->cnt - pos) > 0) {
+			memmove(&mf->a[pos+1], &mf->a[pos], sizeof(int)*(mf->cnt - pos));			
+		}
+		mf->a[pos] = num;
 		mf->cnt++;
 	}	
-}
-
-int cmp(const void*a, const void*b) {
-	return *(int*)a - *(int*)b;
 }
 
 double medianFinderFindMedian(MedianFinder* mf) 
@@ -38,7 +54,6 @@ double medianFinderFindMedian(MedianFinder* mf)
 	if(mf == NULL || mf->cnt<=0) {
 		return 0;
 	} else {
-		qsort(mf->a, mf->cnt, sizeof(int), cmp);
 		if (mf->cnt % 2 == 1) {
 			return mf->a[mf->cnt / 2];
 		} else {
@@ -57,13 +72,28 @@ void medianFinderFree(MedianFinder* mf)
 int main()
 {
 	MedianFinder *mf = medianFinderCreate();
-	medianFinderAddNum(mf, 1);
+	medianFinderAddNum(mf, 6);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 10);
+	printf("%g ", medianFinderFindMedian(mf));
 	medianFinderAddNum(mf, 2);
-	double d1 = medianFinderFindMedian(mf);
-	printf("%g ", d1);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 6);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 5);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 0);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 6);
+	printf("%g ", medianFinderFindMedian(mf));
 	medianFinderAddNum(mf, 3);
-	double d2 = medianFinderFindMedian(mf);
-	printf("%g ", d2);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 1);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 0);
+	printf("%g ", medianFinderFindMedian(mf));
+	medianFinderAddNum(mf, 0);
+	printf("%g ", medianFinderFindMedian(mf));
 	return 0;
 } 
 
