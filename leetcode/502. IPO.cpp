@@ -6,24 +6,30 @@
 
 #define MAX_COUNT 100000
 bool visited[MAX_COUNT] = { 0 };
-int max = 0; // 最大收益
 
-void dfs(int k, int w, int*p, int pn, int*c, int cn)
+int gd(int k, int w, int*p, int pn, int*c, int cn)
 {
     if (k == 0 || w < 0 || p == NULL || pn <= 0 || c == NULL || cn <= 0) {
-        return;
+        return 0;
     }
-    for (int i = 0; i < cn; i++) {
-        if (!visited[i] && w >= c[i]) { // 可投资
-            int w2 = w + p[i]; // 收益增加
-            if (max < w2) {
-                max = w2;
+    memset(visited, 0, sizeof(visited));
+    for (; k > 0; k--) {
+        int m = -1; // 找最优
+        for (int i = 0; i < cn; i++) {
+            if (!visited[i] && w >= c[i]) { // 可投资
+                if (m == -1) {
+                    m = i;
+                } else if (p[m] < p[i]) {
+                    m = i;
+                }
             }
-            visited[i] = true;
-            dfs(k - 1, w2, p, pn, c, cn);
-            visited[i] = false;
+        }
+        if (m != -1) { // 找到
+            w += p[m]; // 收益增加
+            visited[m] = true;
         }
     }
+    return w;
 }
 
 int findMaximizedCapital(int k, int w, int*p, int pn, int*c, int cn)
@@ -31,10 +37,7 @@ int findMaximizedCapital(int k, int w, int*p, int pn, int*c, int cn)
     if (k == 0 || w < 0 || p == NULL || pn <= 0 || c == NULL || cn <= 0) {
         return 0;
     }
-    max = 0;
-    memset(visited, 0, sizeof(visited));
-    dfs(k, w, p, pn, c, cn);
-    return max;
+    return gd(k, w, p, pn, c, cn);
 }
 
 int main()
