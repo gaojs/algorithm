@@ -4,14 +4,13 @@
 #include <limits.h>
 #include <math.h>
 
-#define MAX_COUNT 10000 
+#define MAX_COUNT 10000
 int visited[MAX_COUNT] = {0};
-#define MAX_LEN 100 
-char str[MAX_LEN] = {0};
+char str[MAX_COUNT] = {0};
 int len = 0;
 int P = 0;
 
-void dfs(int k, int i) 
+void dfs(int k, int i)
 {
     i -= i / P * P;
     i *= 10;
@@ -34,10 +33,11 @@ char *crackSafe(int n, int k)
     len = 0;
     dfs(k, 0);
     for (int i = 0; i < n; i++) {
-    	str[len++] = '0';    	
-	} 
+    	str[len++] = '0';
+	}
     return str;
 }
+
 
 int main()
 {
