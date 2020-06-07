@@ -13,41 +13,40 @@ struct ListNode {
 
 class Solution {
 public:
-	void appendNode(ListNode* &head, ListNode* &tail, int val) {
+	int appendNode(ListNode* &head, ListNode* &tail, int val) {
 		if (head == NULL) {
-			head = tail =  new ListNode(val);
+			head = tail = new ListNode(val % 10);
 		} else {
-			tail->next = new ListNode(val);
+			tail->next = new ListNode(val % 10);
 			tail = tail->next;			
 		}
+		return val / 10; // 返回进位 
 	}
 	
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 		ListNode* head = NULL, *tail = NULL;        
+		int carry = 0; // 处理进位 
 		while (l1 != NULL && l2 != NULL) {
-			appendNode(head, tail, l1->val + l2->val);
+			int t = l1->val + l2->val + carry;
+			carry = appendNode(head, tail, t);
 			l1 = l1->next;
 			l2 = l2->next;
 		}   	    
 		while (l1 != NULL) {
-			appendNode(head, tail, l1->val);
+			int t = l1->val + carry;
+			carry = appendNode(head, tail, t);
 			l1 = l1->next;
 		}   	    
 		while (l2 != NULL) {
-			appendNode(head, tail, l2->val);
+			int t = l2->val + carry;
+			carry = appendNode(head, tail, t);
 			l2 = l2->next;
-		}
-		int carry = 0; // 处理进位 
-		for (ListNode *p = head; p != NULL; p = p->next) {
-			int t = p->val + carry;
-			p->val = t % 10;
-			carry = t / 10;
 		}
 		if (carry > 0) { // 有进位 	
 			appendNode(head, tail, carry);
 		}
 		return head;
-    }
+	}
 };
 
 ListNode* createList(vector<int>a) {
