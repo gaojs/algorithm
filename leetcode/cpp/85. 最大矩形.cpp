@@ -1,4 +1,3 @@
-ï»¿// åŠå…¬å®¤ç†„ç¯
 #include <cmath>
 #include <climits>
 #include <cstdlib>
@@ -16,21 +15,21 @@ int largestRectangleArea(vector<int>& heights)
 {
     int ret = 0;
     stack<int> index;
-    index.push(-1); // å·¦è¾¹ç•Œèµ·ç‚¹
-    heights.push_back(0); // å³è¾¹ç•Œæœ€å°å€¼
+    index.push(-1); // ×ó±ß½çÆğµã
+    heights.push_back(0); // ÓÒ±ß½ç×îĞ¡Öµ
     for (size_t i = 0; i < heights.size(); i++) {
         while (index.size() > 1) {
             int h = heights[index.top()];
             if (h < heights[i]) {
-                break; // ç›´æ¥å…¥æ ˆ
+                break; // Ö±½ÓÈëÕ»
             }
-            index.pop(); // å‡ºæ ˆ
+            index.pop(); // ³öÕ»
             int left = index.top();
             int w = (i - 1) - left;
             int area = h * w;
             ret = max(ret, area);
         }
-        index.push(i); // å…¥æ ˆ
+        index.push(i); // ÈëÕ»
     }
     return ret;
 }
