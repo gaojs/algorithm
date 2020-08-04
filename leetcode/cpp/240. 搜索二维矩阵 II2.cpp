@@ -1,14 +1,4 @@
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <map>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
 
 bool search(vector<vector<int>>& m, int t, int r1, int c1, int r2, int c2)

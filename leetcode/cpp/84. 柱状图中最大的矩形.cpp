@@ -1,14 +1,4 @@
-#include <cmath>
-#include <climits>
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <map>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
 
 int largestRectangleArea(vector<int>& heights)

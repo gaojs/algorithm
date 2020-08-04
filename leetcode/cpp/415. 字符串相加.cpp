@@ -1,16 +1,4 @@
-#include <cmath>
-#include <climits>
-#include <cstdlib>
-#include <cstring>
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <unordered_map>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <map>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
 
 string addStrings(string n1, string n2)

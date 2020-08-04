@@ -1,15 +1,4 @@
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <stack>
-#include <map>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
 
 vector<int> str2vec(const string s)
