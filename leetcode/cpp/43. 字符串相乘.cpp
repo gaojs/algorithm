@@ -1,37 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> str2vec(const string s)
+string multiply(string n1, string n2)
 {
-    vector<int> v; // 倒序存放各位数字 
-    
-    for (int i = s.size() - 1; i >= 0; i--) {
-        v.push_back(s[i] - '0'); // 字符转数字
-    }
-    return v; 
-}
+    vector<int> a(n1.size(), 0);
+    vector<int> b(n2.size(), 0);
+    vector<int> c(n1.size() + n2.size(), 0);
 
-string vec2str(const vector<int> v)
-{
-    string s; // 正序存放字符串 
-    
-    for (int i = v.size() - 1; i >= 0; i--) {
-        s.push_back(v[i] + '0'); // 数字转字符
+    for (int i = n1.size() - 1, j = 0; i >= 0; i--) {
+        a[j++] = n1[i] - '0'; // 字符串n1转数组a
     }
-    return s;
-}
-
-vector<int> mul(const vector<int> a, const vector<int> b) 
-{
-    vector<int> c(a.size() + b.size()); // c = a * b
-    
-    // 先算乘积，竖式乘法 
-    for(int i = 0; i < a.size(); i++) {
+    for (int i = n2.size() - 1, j = 0; i >= 0; i--) {
+        b[j++] = n2[i] - '0'; // 字符串n2转数组b
+    }
+    // 先算乘积，竖式乘法  // c = a * b
+    for (int i = 0; i < a.size(); i++) {
         for (int j = 0; j < b.size(); j++) {
-            int t = a[i] * b[j]; // 乘积 
-            int w = (i + j); // 当前位 
-            c[w] += t % 10; // 个位 
-            c[w + 1] += t / 10; // 进位 
+            c[i + j] += a[i] * b[j];
         }
     }
     // 再处理进位 
@@ -40,30 +25,20 @@ vector<int> mul(const vector<int> a, const vector<int> b)
         c[i] %= 10;
     }
     // 舍去高位的0
-    for (int i = c.size() - 1; i > 0; i--) {
-        if (c[i] == 0) {
-            c.pop_back();
-        } else {
-            break;
-        }
+    int i = c.size() - 1;
+    for (; i > 0 && c[i] == 0; i--) {
+        c.pop_back();
     }
-    return c;
+    string ans; // 转成字符串
+    for (; i >= 0; i--) {
+        ans.push_back(c[i] + '0');
+    }
+    return ans;
 }
 
-string multiply(string n1, string n2) 
+int main()
 {
-    vector<int> a = str2vec(n1);
-    vector<int> b = str2vec(n2);
-    vector<int> c = mul(a, b);
-    return vec2str(c);
+    cout << multiply("123", "456");
+    // cout << multiply("2", "3");
+    return 0;
 }
-
-int main() 
-{
-    // vector<int> v = str2vec("123");
-    // cout<<vec2str(v);
-    // cout<<multiply("123","456");
-    cout<<multiply("2","3");
-    return 0;        
-}
-
