@@ -13,22 +13,22 @@ struct TreeNode {
 };
 
 typedef struct TreeNode node_t;
-#define MAX_NODE_COUNT 100000 // 足够大 
+#define MAX_NODE_COUNT 100000 // 足够大
 node_t *que[MAX_NODE_COUNT] = { 0 };
 int a[MAX_NODE_COUNT] = { 0 };
 
 node_t *createTree(int *a, int size)
 {
     if (a == NULL || size <= 0) {
-        return NULL; // 参数有误 
-    } else { // 创建 二叉树 
+        return NULL; // 参数有误
+    } else { // 创建 二叉树
         node_t* root = (node_t*)malloc(sizeof(node_t));
-        if (root == NULL) { // 内存申请失败 
+        if (root == NULL) { // 内存申请失败
             return NULL;
         } else {
             memset(que, 0, sizeof(que));
-            int head = 0, tail = 0; // 模拟队列 		
-            int i = 0; // 索引 
+            int head = 0, tail = 0; // 模拟队列
+            int i = 0; // 索引
             root->val = a[i++];
             root->left = NULL;
             root->right = NULL;
@@ -41,7 +41,7 @@ node_t *createTree(int *a, int size)
                         int v = a[i++];
                         if (v != INT_MIN) {
                             node_t*n = (node_t*)malloc(sizeof(node_t));
-                            if (n == NULL) { // 内存申请失败 
+                            if (n == NULL) { // 内存申请失败
                                 return root;
                             } else {
                                 n->val = v;
@@ -56,7 +56,7 @@ node_t *createTree(int *a, int size)
                         int v = a[i++];
                         if (v != INT_MIN) {
                             node_t*n = (node_t*)malloc(sizeof(node_t));
-                            if (n == NULL) { // 内存申请失败 
+                            if (n == NULL) { // 内存申请失败
                                 return root;
                             } else {
                                 n->val = v;
@@ -116,7 +116,7 @@ char* serialize(node_t* root)
         return NULL;
     }
     int n = 0;
-    int head = 0, tail = 0; // 模拟队列 	
+    int head = 0, tail = 0; // 模拟队列
     memset(que, 0, sizeof(que));
     memset(a, 0, sizeof(a));
     que[tail++] = root;
@@ -157,7 +157,7 @@ void freeTree(node_t* root)
 {
     if (root == NULL) {
         return;
-    } else { // 后根 销毁 
+    } else { // 后根 销毁
         freeTree(root->left);
         root->left = NULL;
         freeTree(root->right);
@@ -171,7 +171,7 @@ void preOrderPrint(node_t* root)
 {
     if (root == NULL) {
         return;
-    } else { // 先根 遍历 
+    } else { // 先根 遍历
         printf("%d,", root->val);
         preOrderPrint(root->left);
         preOrderPrint(root->right);
@@ -182,7 +182,7 @@ void inOrderPrint(node_t* root)
 {
     if (root == NULL) {
         return;
-    } else { // 中根 遍历 
+    } else { // 中根 遍历
         inOrderPrint(root->left);
         printf("%d,", root->val);
         inOrderPrint(root->right);
@@ -193,7 +193,7 @@ void postOrderPrint(node_t* root)
 {
     if (root == NULL) {
         return;
-    } else { // 先根 遍历 
+    } else { // 先根 遍历
         postOrderPrint(root->left);
         postOrderPrint(root->right);
         printf("%d,", root->val);
@@ -201,7 +201,7 @@ void postOrderPrint(node_t* root)
 }
 
 int main()
-{    
+{
     /*************************
     char a[] = "1,2,3,null,null,4,5";*/
     node_t *root = deserialize(a);
