@@ -49,8 +49,8 @@ void PreOrder(TreeNode* root)
 void PostOrder(TreeNode* root)
 {
     if (root != nullptr) {
-        PreOrder(root->left);
-        PreOrder(root->right);
+        PostOrder(root->left);
+        PostOrder(root->right);
         cout << root->val << ",";
     }
 }
