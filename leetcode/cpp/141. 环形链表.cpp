@@ -5,14 +5,16 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x) : val(x), next(NULL)
+    {
+    }
 };
 
 bool hasCycle(ListNode *head)
 {
     ListNode *p = head;
     ListNode *q = head;
-    while(p!=nullptr && q!=nullptr){
+    while (p != nullptr && q != nullptr) {
         p = p->next; //Âý
         q = q->next; //¿ì
         if (q == nullptr) {
